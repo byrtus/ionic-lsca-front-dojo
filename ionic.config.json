@@ -1,0 +1,7 @@
+{
+  "name": "Ionic LSCA Front Dojo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
