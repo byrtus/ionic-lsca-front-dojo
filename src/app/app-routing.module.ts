@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AuthGuard} from "./providers/auth.guard";
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'wallet',
-    loadChildren: () => import('./pages/wallet/wallet.module').then( m => m.WalletPageModule)
+    loadChildren: () => import('./pages/wallet/wallet.module').then( m => m.WalletPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'qr',
