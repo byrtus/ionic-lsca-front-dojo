@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Wallet</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+      <ion-segment-button value="myCards">
+        My Stamp Cards
+      </ion-segment-button>
+      <ion-segment-button value="allCards">
+        All Cards
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content>
