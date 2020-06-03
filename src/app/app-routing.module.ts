@@ -9,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'promo',
-    loadChildren: () => import('./pages/promo/promo.module').then( m => m.PromoPageModule)
+    loadChildren: () => import('./pages/promo/promo.module').then( m => m.PromoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'wallet',
@@ -18,17 +19,20 @@ const routes: Routes = [
   },
   {
     path: 'qr',
-    loadChildren: () => import('./pages/qr/qr.module').then( m => m.QrPageModule)
+    loadChildren: () => import('./pages/qr/qr.module').then( m => m.QrPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'map',
-    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
+    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
+  providers: [AuthGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

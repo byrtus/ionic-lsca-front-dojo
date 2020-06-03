@@ -25,7 +25,8 @@ import {HttpClientModule} from "@angular/common/http";
         BarcodeScanner,
         Base64ToGallery,
         HttpClientModule,
-        LoginService
+        LoginService,
+
     ],
     bootstrap: [AppComponent]
 })
