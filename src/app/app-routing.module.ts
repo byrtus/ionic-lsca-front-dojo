@@ -26,6 +26,14 @@ const routes: Routes = [
     path: 'map',
     loadChildren: () => import('./pages/customer/map/map.module').then(m => m.MapPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/public/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule)
   }
 ];
 @NgModule({

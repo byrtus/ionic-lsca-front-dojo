@@ -23,6 +23,7 @@ const routes: Routes = [
         path: 'qr',
         loadChildren: () => import('../qr/qr.module').then(m => m.QrPageModule)
       },
+
       {
         path: '',
         redirectTo: '/tabs/wallet',
@@ -32,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/wallet',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];
