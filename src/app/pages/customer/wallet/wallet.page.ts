@@ -3,8 +3,10 @@ import {Config, IonList} from "@ionic/angular";
 import {AllCompaniesService} from "../../../providers/allCompanies.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {UserService} from "../../../providers/user.service";
 
-const apiUrl = 'https://loyalty-card-stamp-app.herokuapp.com';
+const userId = '3f97696a-7773-4f22-98a8-57182c8e510f';
+
 
 @Component({
     selector: 'app-wallet',
@@ -20,10 +22,13 @@ export class WalletPage implements OnInit {
     groups: any = [];
     private data: any;
     companies: any[];
+    user: any;
+
 
     constructor(
         public config: Config,
         public companiesService: AllCompaniesService,
+        public userService: UserService,
         private http: HttpClient
     ) {
     }
@@ -31,6 +36,7 @@ export class WalletPage implements OnInit {
     ngOnInit() {
         this.updateSchedule();
         this.getCompanies();
+        this.getUser();
         this.ios = this.config.get('mode') === 'ios';
     }
 
@@ -54,7 +60,9 @@ export class WalletPage implements OnInit {
     }
 
 
-
-
-
+    private getUser() {
+        this.userService.getUserById(userId).subscribe(
+            response => this.user = response
+        );
+    }
 }

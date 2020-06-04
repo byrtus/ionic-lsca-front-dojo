@@ -18,7 +18,19 @@
     <ion-content>
         <ion-list [ngSwitch]="segment">
             <ion-item-group *ngSwitchCase="'myCards'">
-                <div>To Do</div>
+                <ion-card *ngFor="let cards of user | keyvalue">
+
+                    <ion-card-content >
+                        {{ cards.key}} : {{ cards.value | json}}
+<!--                        <ion-card-header>-->
+<!--                            <ion-card-subtitle>{{user.id}}</ion-card-subtitle>-->
+<!--                        </ion-card-header>-->
+                    </ion-card-content>
+
+                    <!--                    <ion-card-content>-->
+                    <!--                        <button>{{ company.stampCard.score }}</button>-->
+                    <!--                    </ion-card-content>-->
+                </ion-card>
             </ion-item-group>
         </ion-list>
 

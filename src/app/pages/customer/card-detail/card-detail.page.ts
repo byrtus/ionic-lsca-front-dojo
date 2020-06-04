@@ -12,7 +12,6 @@ import {HttpClient} from "@angular/common/http";
 export class CardDetailPage implements OnInit {
     passedId = null;
     company: any[];
-    rewards: any[]
 
     constructor(
         public config: Config,
@@ -39,8 +38,6 @@ getCard(){
     );
 }
 
-    // getRewards(){
-    //     this.rewards = this.company[0][3];
-    // }
+
 
 }
