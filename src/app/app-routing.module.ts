@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'stat',
     loadChildren: () => import('./pages/manager/stat/stat.module').then(m => m.StatPageModule)
+  },
+  {
+    path: 'tabs/wallet/card-detail/:companyId',
+    loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule)
   }
 ];
 @NgModule({

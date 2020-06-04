@@ -20,11 +20,11 @@ export class AllCompaniesService {
     return this.http.get<any>(`${apiUrl}/api/companies`, header)
   }
 
-  // getAllCompanies() {
-  //   console.log(this.postLogin())
-  //   this.()
-  //       .subscribe((response) => {
-  //         localStorage.setItem("Companies", response.body['Companies']);
-  //       });
-  // }
+  getCompanyById(companyId) {
+    const header ={ headers: new HttpHeaders()
+          .set('Authorization',  `${AuthService.getToken()}`)}
+    return this.http.get<any>(`${apiUrl}/api/companies/${companyId}`, header)
+
+  }
+
 }

@@ -18,9 +18,8 @@ export class WalletPage implements OnInit {
     ios: boolean;
     segment = 'myCards';
     groups: any = [];
-    myjason: any = null;
     private data: any;
-    companies: any;
+    companies: any[];
 
     constructor(
         public config: Config,
@@ -54,25 +53,8 @@ export class WalletPage implements OnInit {
         );
     }
 
-    getSelectOptions(): Observable<string[]> {
-        this.myjason = this.http.get<string[]>(`${apiUrl}/api/companies`)
-            .pipe();
-        console.log(this.myjason)
-        return this.http.get<string[]>(`${apiUrl}/api/companies`)
-            .pipe();
-    }
 
-    getSelectOptions2() {
-        this.myjason = this.http.get<string[]>(`${apiUrl}/api/companies`)
-            .subscribe(data => {
-                this.data = data;
 
-            }, err => {
-            });
-        console.log(this.data)
-        return this.http.get<string[]>(`${apiUrl}/api/companies`)
-            .pipe();
-    }
 
 
 }
