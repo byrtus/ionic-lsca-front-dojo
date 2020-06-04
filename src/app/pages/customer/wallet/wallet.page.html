@@ -8,7 +8,6 @@
         My Stamp Cards
       </ion-segment-button>
       <ion-segment-button value="allCards">
-        <ion-button (click)="getSelectOptions()">Companies</ion-button>
         All Cards
       </ion-segment-button>
     </ion-segment>
@@ -19,14 +18,23 @@
   <ion-content>
     <ion-list [ngSwitch]="segment" >
       <ion-item-group *ngSwitchCase="'myCards'">
-        <div>test</div>
+        <ion-card *ngFor="let company of companies">
+          <ion-card-header>
+            <ion-card-title>{{ company.companyName }}</ion-card-title>
+            <ion-card-subtitle>{{company.zipCode}} {{ company.city }} {{ company.street }} {{company.localNumber}}</ion-card-subtitle>
+
+          </ion-card-header>
+
+          <ion-card-content>
+            <button>{{ company.stampCard.score }}</button>
+          </ion-card-content>
+        </ion-card>
       </ion-item-group>
     </ion-list>
 
     <ion-list [ngSwitch]="segment" >
       <ion-item-group *ngSwitchCase="'allCards'">
         <div>test2</div>
-        <div>{{myjason}}</div>
       </ion-item-group>
     </ion-list>
 

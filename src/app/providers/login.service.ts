@@ -19,7 +19,7 @@ export class LoginService {
     }
 
     login(username: string, password: string) {
-        //jak coś może być trzeba obciąć "Bearer "
+        //jak coś może być trzeba obciąć "Bearer "??????
         this.postLogin(username, password)
             .subscribe((response) => {
                 localStorage.setItem("Token", response.body['Authorization']);

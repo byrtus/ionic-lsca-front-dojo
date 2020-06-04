@@ -17,4 +17,8 @@ export class AuthService {
         // true or false
         return !this.jwtHelper.isTokenExpired(token);
     }
+
+    static getToken() {
+        return localStorage.getItem('Token');
+    }
 }

@@ -34,6 +34,14 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'qr',
+    loadChildren: () => import('./pages/manager/qr/qr.module').then( m => m.QrPageModule)
+  },
+  {
+    path: 'stat',
+    loadChildren: () => import('./pages/manager/stat/stat.module').then(m => m.StatPageModule)
   }
 ];
 @NgModule({
