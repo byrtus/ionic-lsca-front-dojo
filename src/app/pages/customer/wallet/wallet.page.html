@@ -1,41 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Wallet</ion-title>
-  </ion-toolbar>
-  <ion-toolbar *ngIf="!ios">
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
-      <ion-segment-button value="myCards">
-        My Stamp Cards
-      </ion-segment-button>
-      <ion-segment-button value="allCards">
-        All Cards
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Wallet</ion-title>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="!ios">
+        <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+            <ion-segment-button value="myCards">
+                My Stamp Cards
+            </ion-segment-button>
+            <ion-segment-button value="allCards">
+                All Cards
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-content>
-    <ion-list [ngSwitch]="segment" >
-      <ion-item-group *ngSwitchCase="'myCards'">
-        <div>To Do</div>
-      </ion-item-group>
-    </ion-list>
+    <ion-content>
+        <ion-list [ngSwitch]="segment">
+            <ion-item-group *ngSwitchCase="'myCards'">
+                <div>To Do</div>
+            </ion-item-group>
+        </ion-list>
 
-    <ion-list [ngSwitch]="segment" >
-      <ion-item-group *ngSwitchCase="'allCards'">
-        <ion-card *ngFor="let company of companies">
-          <ion-card-header>
-            <ion-card-title>{{ company.companyName }}</ion-card-title>
-            <ion-card-subtitle>{{company.zipCode}} {{ company.city }} {{ company.street }} {{company.localNumber}}</ion-card-subtitle>
+        <ion-list [ngSwitch]="segment">
+            <ion-item-group *ngSwitchCase="'allCards'">
+                <ion-card *ngFor="let company of companies">
 
-          </ion-card-header>
+                    <ion-item detail="false" lines="none" routerLink="/tabs/wallet/stamp-card/{{company.stampCard.id}}">
+                        <ion-card-header>
+                            <ion-card-title>{{ company.companyName }}</ion-card-title>
+                            <ion-card-subtitle>{{company.zipCode}} {{ company.city }} {{ company.street }} {{company.localNumber}}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-item>
 
-          <ion-card-content>
-            <button>{{ company.stampCard.score }}</button>
-          </ion-card-content>
-        </ion-card>
-      </ion-item-group>
-    </ion-list>
+<!--                    <ion-card-content>-->
+<!--                        <button>{{ company.stampCard.score }}</button>-->
+<!--                    </ion-card-content>-->
+                </ion-card>
+            </ion-item-group>
+        </ion-list>
 
-</ion-content>
+    </ion-content>
