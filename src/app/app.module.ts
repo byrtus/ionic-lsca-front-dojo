@@ -13,6 +13,7 @@ import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
 import {Base64ToGallery} from '@ionic-native/base64-to-gallery/ngx';
 import {LoginService} from "./providers/login.service";
 import {HttpClientModule} from "@angular/common/http";
+import {AllCompaniesService} from "./providers/allCompanies.service";
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,6 +27,7 @@ import {HttpClientModule} from "@angular/common/http";
         Base64ToGallery,
         HttpClientModule,
         LoginService,
+        AllCompaniesService,
 
     ],
     bootstrap: [AppComponent]
