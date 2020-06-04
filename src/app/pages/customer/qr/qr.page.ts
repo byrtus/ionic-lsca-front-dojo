@@ -14,7 +14,7 @@ export class QrPage implements OnInit {
 
   @ViewChild('userQRCode', { static: true }) userQRCode: IonList;
 
-  qrData = 'userID: Qgbda6Hd2DA66fbaD^bdads1';
+  qrData = 'userID: 2ad65f42-758f-4868-84a5-b5a970977538';
   ios: boolean;
   segment = 'myQR';
   groups: any = [];

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-back-button defaultHref="/tabs/wallet"></ion-back-button>
+    </ion-button>
+    <ion-title>card-detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let card of company">
+
+      <ion-card-header>
+        <ion-card-title>{{ card.companyName }}</ion-card-title>
+        <p>Rewards:</p>
+<!--        <ion-card-subtitle>{{card.id}}</ion-card-subtitle>-->
+        <ion-item *ngFor="let stampCard of (card.stampCard.stampCardReward)">
+            {{ stampCard.position}} Stamps: {{ stampCard.reward.rewardDescription}}
+<!--         position : {{ stampCard.position}} {{ stampCard.reward.rewardDescription}}-->
+        </ion-item>
+
+      </ion-card-header>
+
+    <!--                    <ion-card-content>-->
+    <!--                        <button>{{ company.stampCard.score }}</button>-->
+    <!--                    </ion-card-content>-->
+  </ion-card>
+</ion-content>

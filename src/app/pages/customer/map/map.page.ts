@@ -85,7 +85,10 @@ export class MapPage {
                 position: position,
                 title: marker.companyName,
                 latitude: marker.latitude,
-                longitude: marker.longitude
+                longitude: marker.longitude,
+                city: marker.city,
+                street: marker.street,
+                localNumber: marker.localNumber
             });
             mapMarker.setMap(this.map);
             this.addInfoWindowToMarker(mapMarker)
@@ -95,8 +98,8 @@ export class MapPage {
     addInfoWindowToMarker(marker) {
         var infoWindowContent = '<div id= "content"' +
             '<h2 id="firstHeading" class="firstHeading">' + marker.title + '</h2>' +
-            '<p>Latitude: ' + marker.latitude + '</p>' +
-            '<p>Longitude: ' + marker.longitude + '</p>' +
+            '<h6> Address: '+ marker.city + ' ' + marker.street + ' ' + marker.localNumber +'</h6>' +
+            '<h20> Latitude: ' + marker.latitude + ' Longitude: ' + marker.longitude + '</h20>' +
             '</div>';
 
         var infoWindow = new google.maps.InfoWindow({
