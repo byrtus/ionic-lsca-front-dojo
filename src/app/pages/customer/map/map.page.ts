@@ -71,14 +71,9 @@ export class MapPage {
     }
 
 
-
     ionViewDidEnter() {
         // this.getCompanies();
 
-        console.log(this.markers);
-        for (let marker of this.markers) {
-          console.log(marker.id);
-        }
         this.showMap();
         // this.addMarkersToMap();
     }
@@ -92,7 +87,6 @@ export class MapPage {
                 latitude: marker.latitude,
                 longitude: marker.longitude
             });
-            console.log(marker.latitude)
             mapMarker.setMap(this.map);
             this.addInfoWindowToMarker(mapMarker)
         }
@@ -132,7 +126,6 @@ export class MapPage {
             disableDefaultUI: true
         };
         this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-        console.log("enter")
         this.addMarkersToMap();
     }
 

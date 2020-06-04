@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Promotions</ion-title>
+    <ion-title>Promotions (Last 3 Modification)</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let company of companies">
+  <ion-card *ngFor="let company of companies; let i=index">
 
-    <ion-item detail="false" lines="none" routerLink="/tabs/wallet/card-detail/{{company.id}}">
+    <ion-item *ngIf="i<3" detail="false" lines="none" routerLink="/tabs/wallet/card-detail/{{company.id}}">
       <ion-card-header>
         <ion-card-title>{{ company.companyName }}</ion-card-title>
         <ion-card-subtitle>{{company.zipCode}} {{ company.city }} {{ company.street }} {{company.localNumber}}</ion-card-subtitle>

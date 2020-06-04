@@ -3,11 +3,48 @@
   display: flex ;
   justify-content: center ;
 }
+.login-button2{
+  padding-top: 1em;
+  display: flex ;
+  flex-direction: column;
+  justify-content: center ;
+
+}
+
+.login-logo{
+  padding-top: 1em;
+  display: flex ;
+  justify-content: center ;
+
+}
 
 .login-button{
   padding-top: 3em;
 }
 
-.btn{
-  width: 14em;
+.md-raised{
+  //padding-top: 3em;
+  padding: 0 6px 0 6px;
+  //margin: 6px 8px 6px 8px;
+  min-width: 88px;
+  border-radius: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: none;
+  outline: none;
+  margin-top: 20px !important;
+
+  background-color: #3a7be0;
+  height:36px ;
+  width:48px ;
+  font-size:14px ;
+  color: white;
+  display: block;
+  margin: auto;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
+
+
+
+

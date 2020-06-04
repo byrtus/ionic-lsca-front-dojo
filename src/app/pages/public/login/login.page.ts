@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../../../providers/login.service";
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  login: string = '';
+  password: string = '';
+
+  constructor(
+      private loginService: LoginService
+  ) { }
 
   ngOnInit() {
   }
 
-  login() {
 
+  onSubmit(f: NgForm) {
+    console.log(f.value);
+    this.loginService.login(f.value.login, f.value.password);
   }
 }

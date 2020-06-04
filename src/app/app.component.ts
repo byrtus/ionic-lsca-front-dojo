@@ -54,6 +54,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loginService.login("adam", "adam123")
+    // this.loginService.login("adam", "adam123")
   }
 }
