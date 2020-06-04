@@ -5,5 +5,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let company of companies">
 
+    <ion-item detail="false" lines="none" routerLink="/tabs/wallet/card-detail/{{company.id}}">
+      <ion-card-header>
+        <ion-card-title>{{ company.companyName }}</ion-card-title>
+        <ion-card-subtitle>{{company.zipCode}} {{ company.city }} {{ company.street }} {{company.localNumber}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-item>
+
+    <!--                    <ion-card-content>-->
+    <!--                        <button>{{ company.stampCard.score }}</button>-->
+    <!--                    </ion-card-content>-->
+  </ion-card>
 </ion-content>
