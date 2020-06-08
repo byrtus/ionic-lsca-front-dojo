@@ -17,12 +17,7 @@ export class LoginPage implements OnInit {
   constructor(
       private loginService: LoginService,
       protected router: Router
-  ) {
-
-    this.router.navigateByUrl('/tabs/wallet', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/tabs/wallet']);
-      });
-  }
+  ) {  }
 
   ngOnInit() {
 
@@ -32,5 +27,8 @@ export class LoginPage implements OnInit {
   onSubmit(f: NgForm) {
     console.log(f.value);
     this.loginService.login(f.value.login, f.value.password);
+    // this.router.navigateByUrl('/tabs/wallet', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate(['/tabs/wallet']);
+    // });
   }
 }
