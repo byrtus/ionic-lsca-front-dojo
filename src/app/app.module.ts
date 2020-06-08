@@ -14,6 +14,7 @@ import {Base64ToGallery} from '@ionic-native/base64-to-gallery/ngx';
 import {LoginService} from "./providers/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AllCompaniesService} from "./providers/allCompanies.service";
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,6 +29,9 @@ import {AllCompaniesService} from "./providers/allCompanies.service";
         HttpClientModule,
         LoginService,
         AllCompaniesService,
+        JwtHelperService,
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+
 
     ],
     bootstrap: [AppComponent]

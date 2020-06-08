@@ -18,13 +18,13 @@
     <ion-content>
         <ion-list [ngSwitch]="segment">
             <ion-item-group *ngSwitchCase="'myCards'">
-                <ion-card *ngFor="let cards of user | keyvalue">
+                <ion-card >
 
-                    <ion-card-content >
-                        {{ cards.key}} : {{ cards.value | json}}
-<!--                        <ion-card-header>-->
-<!--                            <ion-card-subtitle>{{user.id}}</ion-card-subtitle>-->
-<!--                        </ion-card-header>-->
+                    <ion-card-content *ngFor="let progress of user?.userSpecifics.stampCardProgresses">
+                        <ion-card-header *ngFor="let reward of progress?.stampCard.stampCardReward">
+                            <ion-card-subtitle>{{reward.position}} Stamps: {{reward.reward.rewardDescription}}</ion-card-subtitle>
+                        </ion-card-header>
+                        <h2>Your actual Score: {{progress.actualScore}}</h2>
                     </ion-card-content>
 
                     <!--                    <ion-card-content>-->

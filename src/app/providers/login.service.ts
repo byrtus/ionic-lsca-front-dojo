@@ -11,6 +11,7 @@ const apiUrl = 'https://loyalty-card-stamp-app.herokuapp.com';
 })
 export class LoginService {
 
+    userId: any;
     constructor(
         private http: HttpClient,
         private router: Router
@@ -28,6 +29,7 @@ export class LoginService {
             .subscribe((response) => {
                 localStorage.setItem("Token", response.body['Authorization']);
                 this.router.navigateByUrl('/tabs/wallet');
+
             });
     }
 

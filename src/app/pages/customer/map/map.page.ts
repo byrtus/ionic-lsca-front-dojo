@@ -18,49 +18,7 @@ export class MapPage {
     @ViewChild('map', {read: ElementRef, static: false}) mapRef: ElementRef;
 
     infoWindows: any = [];
-    markers: any = [
-        {
-            "id": "2ad65f42-758f-4868-84a5-b5a970977538",
-            companyName: "Great company",
-            "city": "Krakow",
-            "zipCode": "12-345",
-            "street": "Florianska",
-            "localNumber": 17,
-            longitude: "19.939988",
-            latitude: "50.062938",
-        },
-        {
-            "id": "7a3d05c7-0cf2-46e5-90c4-2f7748c45c9e",
-            companyName: "Even better than great company",
-            "city": "Krakow",
-            "zipCode": "31-877",
-            "street": "Os Avia",
-            "localNumber": 3,
-            longitude: "20.004029",
-            latitude: "50.079930"
-
-        },
-        {
-            "id": "3e9945fd-3f9d-4ce9-a31e-7ed0bb912318",
-            companyName: "Turbo awesome company",
-            "city": "Krakow",
-            "zipCode": "30-364",
-            "street": "Pychowicka",
-            "localNumber": 18,
-            longitude: "19.914740",
-            latitude: "50.031895"
-        },
-        {
-            "id": "ec8e82d7-a694-4447-b17d-79302638698b",
-            companyName: "Fridge stolen food",
-            "city": "Krakow",
-            "zipCode": "31-043",
-            "street": "Stolarska",
-            "localNumber": 9,
-            longitude: "19.961411",
-            latitude: "50.048428"
-        }
-    ];
+    markers: any = [];
 
 
     constructor(
@@ -72,9 +30,9 @@ export class MapPage {
 
 
     ionViewDidEnter() {
-        // this.getCompanies();
+        this.getCompanies();
 
-        this.showMap();
+        // this.showMap();
         // this.addMarkersToMap();
     }
 
@@ -135,10 +93,10 @@ export class MapPage {
     getCompanies() {
         this.companiesService.getCompanies().subscribe(
             response => {
-                this.markers = response,
-                    this.markers = Array.of(this.markers);
-            }
-        );
+                this.markers = response;
+                this.showMap();
+            });
+
     }
 
 }

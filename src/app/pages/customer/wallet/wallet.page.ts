@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserService} from "../../../providers/user.service";
 
-const userId = '3f97696a-7773-4f22-98a8-57182c8e510f';
+const userId = '5ee737bd-d1bf-49c5-980c-fbff563e3315';
 
 
 @Component({
