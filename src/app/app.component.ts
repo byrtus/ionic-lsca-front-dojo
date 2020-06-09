@@ -7,6 +7,7 @@ import {LoginService} from "./providers/login.service";
 import {AuthService} from "./providers/auth.service";
 import {Router} from "@angular/router";
 import {createConsoleLogServer} from "@ionic/angular-toolkit/builders/cordova-serve/log-server";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -37,8 +38,8 @@ export class AppComponent implements OnInit{
     }
   ];
 
-  loggedIn = false;
-  isLogged: boolean = false;
+
+  isLogged$: Observable<boolean>;
 
   constructor(
     private platform: Platform,
@@ -67,23 +68,28 @@ export class AppComponent implements OnInit{
     });
   }
 
-  ionViewDidEnter(){
-    this.isLogged = this.authService.isAuthenticated();
-    console.log('1');
-  }
-
-  ionViewWillEnter(){
-    this.isLogged = this.authService.isAuthenticated();
-    console.log('2');
-  }
+  // ionViewDidEnter(){
+  //   this.isLogged = this.authService.isAuthenticated();
+  //   console.log('1');
+  // }
+  //
+  // ionViewWillEnter(){
+  //   this.isLogged = this.authService.isAuthenticated();
+  //   console.log('2');
+  // }
 
   ngOnInit(): void {
-    this.isLogged = this.authService.isAuthenticated();
+    this.isLogged$ = this.authService.getIsLogged$();
     console.log('3');
     // this.loginService.login("adam", "adam123")
   }
 
   logout() {
     this.loginService.logout();
+  }
+
+  updateToken() {
+    this.authService.updateIsLogged();
+    console.log('init');
   }
 }

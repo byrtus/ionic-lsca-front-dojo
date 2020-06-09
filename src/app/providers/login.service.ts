@@ -35,7 +35,7 @@ export class LoginService {
                 localStorage.setItem("Token", response.body['Authorization']);
                 this._userId = response.body['UserId'];
                 this.authenticationState.next(true);
-                this.router.navigate(['wallet']);
+                this.router.navigate(['tabs','wallet']);
             });
     }
 

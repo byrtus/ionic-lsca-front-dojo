@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'stamp-card',
     loadChildren: () => import('./pages/manager/stamp-card/stamp-card.module').then( m => m.StampCardPageModule)
+  },
+  {
+    path: 'stamp-card',
+    loadChildren: () => import('./pages/manager/stamp-card/stamp-card.module').then( m => m.StampCardPageModule)
   }
 ];
 @NgModule({
