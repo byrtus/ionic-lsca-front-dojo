@@ -46,6 +46,10 @@ const routes: Routes = [
   {
     path: 'tabs/wallet/card-detail/:companyId',
     loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule)
+  },
+  {
+    path: 'stamp-card',
+    loadChildren: () => import('./pages/manager/stamp-card/stamp-card.module').then( m => m.StampCardPageModule)
   }
 ];
 @NgModule({

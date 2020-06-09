@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://loyalty-card-stamp-app.herokuapp.com/'
+  apiUrl: 'https://loyalty-card-stamp-app.herokuapp.com'
 };
 
 /*

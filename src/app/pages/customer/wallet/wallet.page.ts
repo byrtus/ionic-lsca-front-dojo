@@ -4,8 +4,9 @@ import {AllCompaniesService} from "../../../providers/allCompanies.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserService} from "../../../providers/user.service";
+import {LoginService} from "../../../providers/login.service";
+import {Router} from "@angular/router";
 
-const userId = '514a5e9b-e345-4beb-af64-24335878a22e';
 
 
 @Component({
@@ -23,22 +24,41 @@ export class WalletPage implements OnInit {
     private data: any;
     companies: any[];
     user: any;
+    userId = '';
 
 
     constructor(
         public config: Config,
         public companiesService: AllCompaniesService,
         public userService: UserService,
-        private http: HttpClient
+        private http: HttpClient,
+        private loginService: LoginService,
+        private router: Router
     ) {
     }
 
     ngOnInit() {
+        this.userId = this.loginService.userId;
         this.updateSchedule();
         this.getCompanies();
         this.getUser();
         this.ios = this.config.get('mode') === 'ios';
     }
+
+    // ionViewDidEnter(){
+    //     this.loginService.authenticationState.subscribe(state =>{
+    //         if (state) {
+    //             console.log('login OK')
+    //             this.updateSchedule();
+    //             this.getCompanies();
+    //             this.getUser();
+    //             this.ios = this.config.get('mode') === 'ios';
+    //         } else {
+    //             console.log('login FALSE')
+    //             this.router.navigateByUrl('/login')
+    //         }
+    //     })
+    // }
 
 
     updateSchedule() {
@@ -61,7 +81,7 @@ export class WalletPage implements OnInit {
 
 
     private getUser() {
-        this.userService.getUserById(userId).subscribe(
+        this.userService.getUserById(this.userId).subscribe(
             response => this.user = response
         );
     }

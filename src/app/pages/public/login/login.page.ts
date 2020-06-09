@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.loginService.logout();
+    // this.loginService.logout();
   }
 
 

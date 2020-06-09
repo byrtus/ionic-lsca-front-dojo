@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthService} from "./auth.service";
+import {environment} from "../../environments/environment";
 
-const apiUrl = 'https://loyalty-card-stamp-app.herokuapp.com';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +17,13 @@ export class AllCompaniesService {
   getCompanies(): Observable<any> {
     const header ={ headers: new HttpHeaders()
         .set('Authorization',  `${AuthService.getToken()}`)}
-    return this.http.get<any>(`${apiUrl}/api/companies`, header)
+    return this.http.get<any>(`${environment.apiUrl}/api/companies`, header)
   }
 
   getCompanyById(companyId) {
     const header ={ headers: new HttpHeaders()
           .set('Authorization',  `${AuthService.getToken()}`)}
-    return this.http.get<any>(`${apiUrl}/api/companies/${companyId}`, header)
+    return this.http.get<any>(`${environment.apiUrl}/api/companies/${companyId}`, header)
 
   }
 
