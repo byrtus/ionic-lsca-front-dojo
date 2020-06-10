@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from "./providers/auth.guard";
+import {AuthGuard} from './providers/auth.guard';
 
 const routes: Routes = [
   {
@@ -37,11 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'tabs/wallet/card-detail/:companyId',
-    loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule)
-  },
-  {
-    path: 'stamp-card',
-    loadChildren: () => import('./pages/manager/stamp-card/stamp-card.module').then( m => m.StampCardPageModule)
+    loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

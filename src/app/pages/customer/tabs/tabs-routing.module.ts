@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import {AuthGuard} from '../../../providers/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,21 +10,24 @@ const routes: Routes = [
     children: [
       {
         path: 'wallet',
-        loadChildren: () => import('../wallet/wallet.module').then(m => m.WalletPageModule)
+        loadChildren: () => import('../wallet/wallet.module').then(m => m.WalletPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'promo',
-        loadChildren: () => import('../promo/promo.module').then(m => m.PromoPageModule)
+        loadChildren: () => import('../promo/promo.module').then(m => m.PromoPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'map',
-        loadChildren: () => import('../map/map.module').then(m => m.MapPageModule)
+        loadChildren: () => import('../map/map.module').then(m => m.MapPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'qr',
-        loadChildren: () => import('../qr/qr.module').then(m => m.QrPageModule)
+        loadChildren: () => import('../qr/qr.module').then(m => m.QrPageModule),
+        canActivate: [AuthGuard]
       },
-
       {
         path: '',
         redirectTo: '/tabs/wallet',
