@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AuthService} from "./auth.service";
 import {environment} from "../../environments/environment";
+import {LoginService} from "./login.service";
 
 
 @Injectable({
@@ -10,19 +10,20 @@ import {environment} from "../../environments/environment";
 })
 export class AllCompaniesService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private loginService: LoginService) {
   }
 
 
   getCompanies(): Observable<any> {
     const header ={ headers: new HttpHeaders()
-        .set('Authorization',  `${AuthService.getToken()}`)}
+        .set('Authorization',  `${this.loginService.getToken()}`)}
     return this.http.get<any>(`${environment.apiUrl}/api/companies`, header)
   }
 
   getCompanyById(companyId) {
     const header ={ headers: new HttpHeaders()
-          .set('Authorization',  `${AuthService.getToken()}`)}
+          .set('Authorization',  `${this.loginService.getToken()}`)}
     return this.http.get<any>(`${environment.apiUrl}/api/companies/${companyId}`, header)
 
   }

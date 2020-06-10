@@ -30,10 +30,11 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/wallet',
+        redirectTo: '/tabs/map',
         pathMatch: 'full'
       }
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
   {
     path: '',

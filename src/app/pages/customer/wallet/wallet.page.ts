@@ -5,7 +5,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserService} from "../../../providers/user.service";
 import {LoginService} from "../../../providers/login.service";
-import {Router} from "@angular/router";
 
 
 
@@ -32,8 +31,7 @@ export class WalletPage implements OnInit {
         public companiesService: AllCompaniesService,
         public userService: UserService,
         private http: HttpClient,
-        private loginService: LoginService,
-        private router: Router
+        private loginService: LoginService
     ) {
     }
 
