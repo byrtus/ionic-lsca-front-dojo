@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AuthService} from "./auth.service";
 import {environment} from "../../environments/environment";
+import {LoginService} from "./login.service";
 
 
 @Injectable({
@@ -10,13 +10,12 @@ import {environment} from "../../environments/environment";
 })
 export class UserService {
 
-  constructor(
-      private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient,
+              private loginService: LoginService) { }
 
   getUserById(userId): Observable<any> {
     const header ={ headers: new HttpHeaders()
-          .set('Authorization',  `${AuthService.getToken()}`)}
+          .set('Authorization',  `${this.loginService.getToken()}`)}
     return this.http.get<any>(`${environment.apiUrl}/api/users/${userId}`, header)
   }
 }

@@ -1,7 +1,9 @@
+<button (click)="logout()">logoutpls</button>
+
 <ion-app>
     <ion-router-outlet></ion-router-outlet>
-<!--      <ion-split-pane *ngIf="isLogged" contentId="main-content">-->
-    <ion-split-pane contentId="main-content">
+      <ion-split-pane *ngIf="isLogged$ | async" contentId="main-content">
+<!--    <ion-split-pane contentId="main-content">-->
 
         <ion-menu contentId="main-content">
             <ion-content>
@@ -40,7 +42,7 @@
 
         </ion-menu>
 
-        <ion-router-outlet id="main-content"></ion-router-outlet>
+<!--        <ion-router-outlet id="main-content"></ion-router-outlet>-->
 
     </ion-split-pane>
 </ion-app>

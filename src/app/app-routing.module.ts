@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from "./providers/auth.guard";
+import {AuthGuard} from './providers/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/customer/tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./pages/customer/tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'promo',
@@ -35,21 +36,15 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule)
   },
+  // {
+  //   path: 'tabs/wallet/card-detail/:companyId',
+  //   loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule),
+  //   canActivate: [AuthGuard]
+  // },
   {
-    path: 'qr',
-    loadChildren: () => import('./pages/manager/qr/qr.module').then( m => m.QrPageModule)
-  },
-  {
-    path: 'stat',
-    loadChildren: () => import('./pages/manager/stat/stat.module').then(m => m.StatPageModule)
-  },
-  {
-    path: 'tabs/wallet/card-detail/:companyId',
-    loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule)
-  },
-  {
-    path: 'stamp-card',
-    loadChildren: () => import('./pages/manager/stamp-card/stamp-card.module').then( m => m.StampCardPageModule)
+    path: '**',
+    redirectTo: '/login',
+    pathMatch: 'full'
   }
 ];
 @NgModule({

@@ -5,7 +5,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserService} from "../../../providers/user.service";
 import {LoginService} from "../../../providers/login.service";
-import {Router} from "@angular/router";
 
 
 
@@ -24,7 +23,7 @@ export class WalletPage implements OnInit {
     private data: any;
     companies: any[];
     user: any;
-    userId = '';
+    userId: string;
 
 
     constructor(
@@ -32,17 +31,22 @@ export class WalletPage implements OnInit {
         public companiesService: AllCompaniesService,
         public userService: UserService,
         private http: HttpClient,
-        private loginService: LoginService,
-        private router: Router
+        private loginService: LoginService
     ) {
     }
 
-    ngOnInit() {
+    ionViewDidEnter(){
         this.userId = this.loginService.userId;
-        this.updateSchedule();
         this.getCompanies();
         this.getUser();
         this.ios = this.config.get('mode') === 'ios';
+    }
+
+    ngOnInit() {
+        // this.userId = this.loginService.userId;
+        // this.getCompanies();
+        // this.getUser();
+        // this.ios = this.config.get('mode') === 'ios';
     }
 
     // ionViewDidEnter(){
@@ -60,18 +64,6 @@ export class WalletPage implements OnInit {
     //     })
     // }
 
-
-    updateSchedule() {
-        // Close any open sliding items when the schedule updates
-        // if (this.scheduleList) {
-        //   this.scheduleList.closeSlidingItems();
-        // }
-        //
-        // this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-        //   this.shownSessions = data.shownSessions;
-        //   this.groups = data.groups;
-        // });
-    }
 
     getCompanies() {
         this.companiesService.getCompanies().subscribe(

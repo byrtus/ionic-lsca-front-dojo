@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
-import {Router} from "@angular/router";
+import {NavigationStart, Router, RouterEvent} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {filter, map, tap} from "rxjs/operators";
 
 
 @Injectable({
@@ -11,13 +13,16 @@ import {environment} from "../../environments/environment";
 export class LoginService {
 
     private _userId: any;
-    authenticationState = new BehaviorSubject(false);
+    private authenticationState$ = new BehaviorSubject(this.isTokenValid());
 
-    constructor(
-        private http: HttpClient,
-        private router: Router
-        ) {
-
+    constructor(private http: HttpClient,
+                private router: Router,
+                public jwtHelper: JwtHelperService) {
+        router.events
+            .pipe(
+                filter((event: RouterEvent) => event instanceof NavigationStart),
+                tap((event: NavigationStart) => this.authenticationState$.next(this.isTokenValid()))
+            ).subscribe();
     }
 
     get userId(): any {
@@ -32,24 +37,29 @@ export class LoginService {
         //jak coś może być trzeba obciąć "Bearer "??????
         this.postLogin(username, password)
             .subscribe((response) => {
+                console.log('test');
                 localStorage.setItem("Token", response.body['Authorization']);
                 this._userId = response.body['UserId'];
-                this.authenticationState.next(true);
-                this.router.navigate(['wallet']);
+                this.authenticationState$.next(this.isTokenValid());
+                this.router.navigateByUrl('/tabs/wallet');
             });
     }
 
     logout(){
         localStorage.clear();
-        this.authenticationState.next(false);
-        this.router.navigate(['login']);
+        this.authenticationState$.next(false);
+        this.router.navigateByUrl('/login');
     }
 
-     isAuthenticated(){
-        return this.authenticationState.value;
+     getIsAuthenticated(): Observable<boolean> {
+        return this.authenticationState$.asObservable();
      }
 
+    private isTokenValid(): boolean {
+        return !this.jwtHelper.isTokenExpired(localStorage.getItem('Token'));
+    }
 
-
-
+    getToken() {
+        return localStorage.getItem('Token');
+    }
 }

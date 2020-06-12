@@ -4,6 +4,7 @@ import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
 import {Base64ToGallery, Base64ToGalleryOptions} from '@ionic-native/base64-to-gallery/ngx';
 import {ToastController} from '@ionic/angular';
 import {AndroidPermissions} from '@ionic-native/android-permissions';
+import {LoginService} from "../../../providers/login.service";
 
 @Component({
   selector: 'app-qr',
@@ -14,7 +15,7 @@ export class QrPage implements OnInit {
 
   @ViewChild('userQRCode', { static: true }) userQRCode: IonList;
 
-  qrData = 'userID: 2ad65f42-758f-4868-84a5-b5a970977538';
+  qrData: string;
   ios: boolean;
   segment = 'myQR';
   groups: any = [];
@@ -26,10 +27,16 @@ export class QrPage implements OnInit {
       private barcodeScanner: BarcodeScanner,
       private base64ToGallery: Base64ToGallery,
       private toastCtrl: ToastController,
-      public config: Config
+      public config: Config,
+      private loginService: LoginService
   ) { }
 
+  ionViewDidEnter(){
+    this.qrData = 'userID: ' + this.loginService.userId;
+  }
+
   ngOnInit() {
+    // this.qrData = this.qrData + this.loginService.userId;
     this.ios = this.config.get('mode') === 'ios';
     this.checkPermissions();
   }
