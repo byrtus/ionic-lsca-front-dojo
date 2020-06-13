@@ -36,11 +36,11 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule)
   },
-  // {
-  //   path: 'tabs/wallet/card-detail/:companyId',
-  //   loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule),
-  //   canActivate: [AuthGuard]
-  // },
+  {
+    path: 'tabs/wallet/card-detail/:companyId',
+    loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule),
+    canActivate: [AuthGuard]
+  },
   {
     path: '**',
     redirectTo: '/login',

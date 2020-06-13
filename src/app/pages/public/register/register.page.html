@@ -1,12 +1,94 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-button slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
-    </ion-button>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-button slot="start">
+            <ion-back-button defaultHref="/login"></ion-back-button>
+        </ion-button>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="!ios">
+        <ion-segment [(ngModel)]="segment">
+            <ion-segment-button value="userRegister">
+                User Register
+            </ion-segment-button>
+            <ion-segment-button value="companyRegister">
+                Company Register
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-list [ngSwitch]="segment">
+        <ion-item-group *ngSwitchCase="'userRegister'">
+            <p>User Register site</p>
+        </ion-item-group>
+    </ion-list>
 
+    <ion-list [ngSwitch]="segment">
+        <ion-item-group *ngSwitchCase="'companyRegister'">
+
+            <div padding>
+
+                <ion-card>
+                    <h1>Manager Details</h1>
+                    <ion-item>
+                        <ion-input name="firstName" type="text" placeholder="First Name" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="lastName" type="text" placeholder="Last Name" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+                    </ion-item>
+                </ion-card>
+
+                <ion-card>
+                    <h1>Company Details</h1>
+                    <ion-item>
+                        <ion-input name="companyName" type="text" placeholder="Company Name" ngModel
+                                   required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="city" type="text" placeholder="City" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="zipCode" type="text" placeholder="Zip-Code" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="street" type="text" placeholder="Street" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="localNumber" type="text" placeholder="Local Number" ngModel
+                                   required></ion-input>
+                    </ion-item>
+                </ion-card>
+
+                <ion-card>
+                    <h1>Login Details</h1>
+                    <ion-item>
+                        <ion-input name="login" type="text" placeholder="Login" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input name="confirm" type="password" placeholder="Password again" ngModel
+                                   required></ion-input>
+                    </ion-item>
+                </ion-card>
+
+            </div>
+            <div padding>
+                <ion-button size="large" type="submit" expand="block">Register</ion-button>
+            </div>
+        </ion-item-group>
+    </ion-list>
 </ion-content>

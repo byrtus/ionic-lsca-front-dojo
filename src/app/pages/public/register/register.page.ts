@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Config} from "@ionic/angular";
 
 @Component({
   selector: 'app-register',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  ios: boolean;
+  segment = 'userRegister';
+
+  constructor(
+      public config: Config
+  ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.ios = this.config.get('mode') === 'ios';
   }
 
 }
