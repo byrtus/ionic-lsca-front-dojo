@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Config} from "@ionic/angular";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -22,4 +23,12 @@ export class RegisterPage implements OnInit {
     this.ios = this.config.get('mode') === 'ios';
   }
 
+
+  userRegister(userForm: NgForm) {
+    console.log(userForm.value);
+  }
+
+  companyRegister(companyForm: NgForm) {
+    console.log(companyForm.value);
+  }
 }
