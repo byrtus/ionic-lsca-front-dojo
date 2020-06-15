@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Config} from "@ionic/angular";
 import {NgForm} from "@angular/forms";
+import {RegisterService} from "../../../providers/register.service";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ export class RegisterPage implements OnInit {
   segment = 'userRegister';
 
   constructor(
-      public config: Config
+      public config: Config,
+      private registerService: RegisterService
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class RegisterPage implements OnInit {
   }
 
   companyRegister(companyForm: NgForm) {
+    this.registerService.managerRegister(companyForm.value.userName, companyForm.value.password, companyForm.value.firstName, companyForm.value.lastName, companyForm.value.email, companyForm.value.companyName, companyForm.value.city, companyForm.value.zipCode, companyForm.value.street, companyForm.value.localNumber )
     console.log(companyForm.value);
   }
 }

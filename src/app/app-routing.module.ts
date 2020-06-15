@@ -9,26 +9,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'promo',
-    loadChildren: () => import('./pages/customer/promo/promo.module').then(m => m.PromoPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'wallet',
-    loadChildren: () => import('./pages/customer/wallet/wallet.module').then(m => m.WalletPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'qr',
-    loadChildren: () => import('./pages/customer/qr/qr.module').then(m => m.QrPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'map',
-    loadChildren: () => import('./pages/customer/map/map.module').then(m => m.MapPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/public/login/login.module').then( m => m.LoginPageModule)
   },
