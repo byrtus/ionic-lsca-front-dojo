@@ -5,6 +5,7 @@ import {NavigationStart, Router, RouterEvent} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {filter, map, tap} from "rxjs/operators";
+import {ToastController} from "@ionic/angular";
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class LoginService {
 
     constructor(private http: HttpClient,
                 private router: Router,
+                private toastCtrl: ToastController,
                 public jwtHelper: JwtHelperService) {
         router.events
             .pipe(
@@ -33,15 +35,29 @@ export class LoginService {
         return this.http.post<any>(`${environment.apiUrl}/login`, {username: username, password: password}, {observe: "response"})
     }
 
-    login(username: string, password: string) {
+    login(username: string, password: string): any {
         //jak coś może być trzeba obciąć "Bearer "??????
         this.postLogin(username, password)
-            .subscribe((response) => {
+            .subscribe(async response => {
                 console.log('test');
                 localStorage.setItem("Token", response.body['Authorization']);
                 this._userId = response.body['UserId'];
                 this.authenticationState$.next(this.isTokenValid());
+                const toast = await this.toastCtrl.create({
+                    position: 'top',
+                    duration: 3000,
+                    header: 'Login Successful',
+                    message: 'Welcome ' + username
+                });
+                await toast.present();
                 this.router.navigateByUrl('/tabs/wallet');
+            },async error => {
+                const toast = await this.toastCtrl.create({
+                    duration: 3000,
+                    header: 'Login Fail.',
+                    message: 'Bad login or password.'
+                });
+                await toast.present();
             });
     }
 
