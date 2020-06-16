@@ -27,6 +27,7 @@ export class RegisterPage implements OnInit {
 
 
   userRegister(userForm: NgForm) {
+    this.registerService.customerRegister(userForm.value.userName, userForm.value.password, userForm.value.firstName, userForm.value.lastName, userForm.value.email);
     console.log(userForm.value);
   }
 

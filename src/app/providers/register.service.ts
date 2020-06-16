@@ -31,8 +31,25 @@ export class RegisterService {
     }, {observe: "response"})
   }
 
-  managerRegister(username: string, password: string, firstName: string, lastName: string, email: String, companyName: string, city: string, zipCode: string, street: string, localNumber: string) {
+  postCustomer(username: string, password: string, firstName: string, lastName: string, email: String): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/api/register/user`, {
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    }, {observe: "response"})
+  }
+
+  managerRegister(username: string, password: string, firstName: string, lastName: string, email: string, companyName: string, city: string, zipCode: string, street: string, localNumber: string) {
     this.postManager(username, password, firstName, lastName, email, companyName, city, zipCode, street, localNumber)
+        .subscribe((response) => {
+          console.log(response);
+        })
+  }
+
+  customerRegister(username: string, password: string, firstName: string, lastName: string, email: string) {
+    this.postCustomer(username, password, firstName, lastName, email)
         .subscribe((response) => {
           console.log(response);
         })
