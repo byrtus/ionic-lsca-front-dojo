@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../../providers/login.service";
 import {NgForm} from '@angular/forms';
+import {LoadingController} from "@ionic/angular";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,11 @@ export class LoginPage implements OnInit {
 
   login: string = '';
   password: string = '';
+  private loading;
 
   constructor(
-      private loginService: LoginService
+      private loginService: LoginService,
+      private loadingCtrl : LoadingController
   ) {  }
 
   ngOnInit() {
@@ -23,7 +26,19 @@ export class LoginPage implements OnInit {
 
   onSubmit(f: NgForm) {
     console.log(f.value);
-    this.loginService.login(f.value.login, f.value.password);
+
+    this.loadingCtrl.create({
+      message: 'Authentication...'
+    }).then((overlay) => {
+      this.loading = overlay;
+      this.loading.present();
+    })
+
+    setTimeout(() =>{
+      this.loginService.login(f.value.login, f.value.password);
+      this.loading.dismiss();
+    }, 4000)
+
     // this.router.navigateByUrl('/tabs/wallet', { skipLocationChange: true }).then(() => {
     //   this.router.navigate(['/tabs/wallet']);
     // });
