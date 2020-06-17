@@ -28,7 +28,8 @@ export class LoginPage implements OnInit {
     console.log(f.value);
 
     this.loadingCtrl.create({
-      message: 'Authentication...'
+      message: 'Authentication...',
+      spinner: "bubbles"
     }).then((overlay) => {
       this.loading = overlay;
       this.loading.present();

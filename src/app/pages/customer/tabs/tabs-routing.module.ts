@@ -30,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/map',
+        redirectTo: '/tabs/wallet',
         pathMatch: 'full'
       }
     ],

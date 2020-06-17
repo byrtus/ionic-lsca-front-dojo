@@ -3,10 +3,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthGuard} from './providers/auth.guard';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./pages/customer/tabs/tabs.module').then(m => m.TabsPageModule),
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: '',
-    loadChildren: () => import('./pages/customer/tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate: [AuthGuard]
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',
@@ -22,10 +27,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '**',
-    redirectTo: '/login',
-    pathMatch: 'full'
+    path: 'menu',
+    loadChildren: () => import('./pages/customer/menu/menu.module').then( m => m.MenuPageModule)
   },
+
+    // MANAGER COMPONENTS
+
   {
     path: 'tabs',
     loadChildren: () => import('./pages/manager/tabs/tabs.module').then(m => m.TabsPageModule)
@@ -33,7 +40,19 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./pages/manager/menu/menu.module').then(m => m.MenuPageModule)
-  }
+  },
+  {
+    path: 'stat',
+    loadChildren: () => import('./pages/manager/stat/stat.module').then(m => m.StatPageModule)
+  },
+    // Wild Card Protection
+
+  {
+    path: '**',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+
 ];
 @NgModule({
   imports: [

@@ -12,28 +12,28 @@ import {Observable} from "rxjs";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit{
-  appPages = [
-    {
-      title: 'Wallet',
-      url: '/tabs/wallet',
-      icon: 'wallet'
-    },
-    {
-      title: 'Promotions',
-      url: '/tabs/promo',
-      icon: 'pricetags'
-    },
-    {
-      title: 'Map',
-      url: '/tabs/map',
-      icon: 'map'
-    },
-    {
-      title: 'QR Code',
-      url: '/tabs/qr',
-      icon: 'qr-code'
-    }
-  ];
+  // appPages = [
+  //   {
+  //     title: 'Wallet',
+  //     url: '/tabs/wallet',
+  //     icon: 'wallet'
+  //   },
+  //   {
+  //     title: 'Promotions',
+  //     url: '/tabs/promo',
+  //     icon: 'pricetags'
+  //   },
+  //   {
+  //     title: 'Map',
+  //     url: '/tabs/map',
+  //     icon: 'map'
+  //   },
+  //   {
+  //     title: 'QR Code',
+  //     url: '/tabs/qr',
+  //     icon: 'qr-code'
+  //   }
+  // ];
 
 
   isLogged$: Observable<boolean>;
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit{
     this.isLogged$ = this.loginService.getIsAuthenticated();
   }
 
-  logout() {
-    this.loginService.logout();
-  }
+  // logout() {
+  //   this.loginService.logout();
+  // }
 }

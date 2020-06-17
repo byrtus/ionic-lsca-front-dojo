@@ -50,7 +50,7 @@ export class LoginService {
                     message: 'Welcome ' + username
                 });
                 await toast.present();
-                this.router.navigateByUrl('/tabs/wallet');
+                this.router.navigateByUrl('/menu/wallet');
             },async error => {
                 const toast = await this.toastCtrl.create({
                     duration: 3000,
