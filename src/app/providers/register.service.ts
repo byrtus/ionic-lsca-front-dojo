@@ -54,7 +54,7 @@ export class RegisterService {
                         message: 'Please Login'
                     });
                     await toast.present();
-                    this.router.navigateByUrl('/login');
+                    await this.router.navigateByUrl('/login');
                 }, async error => {
                     const toast = await this.toastCtrl.create({
                         duration: 3000,
@@ -82,7 +82,7 @@ export class RegisterService {
                         message: 'Please Login'
                     });
                     await toast.present();
-                    this.router.navigateByUrl('/login');
+                    await this.router.navigateByUrl('/login');
                 }, async error => {
                     const toast = await this.toastCtrl.create({
                         duration: 3000,
@@ -101,20 +101,14 @@ export class RegisterService {
 
     customerRegistryVerification(username: string, password: string, firstName: string, lastName: string, email: string): boolean {
 
-        if (username == '' || password == '' || firstName == '' || lastName == '' || email == '') {
-            return false
-        } else {
-            return true
-        }
+        return !(username == '' || password == '' || firstName == '' || lastName == '' || email == '')
+
     }
 
     managerRegistryVerification(username: string, password: string, firstName: string, lastName: string, email: string, companyName: string, city: string, zipCode: string, street: string, localNumber: string): boolean {
 
-        if (username == '' || password == '' || firstName == '' || lastName == '' || email == '' || companyName == '' || city == '' || zipCode == '' || street == '' || localNumber == '') {
-            return false
-        } else {
-            return true
-        }
+        return !(username == '' || password == '' || firstName == '' || lastName == '' || email == '' || companyName == '' || city == '' || zipCode == '' || street == '' || localNumber == '')
+
     }
 }
 

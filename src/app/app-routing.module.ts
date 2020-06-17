@@ -25,6 +25,14 @@ const routes: Routes = [
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/manager/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'menu',
+    loadChildren: () => import('./pages/manager/menu/menu.module').then(m => m.MenuPageModule)
   }
 ];
 @NgModule({

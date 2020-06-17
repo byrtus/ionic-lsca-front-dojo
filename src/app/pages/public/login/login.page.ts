@@ -32,12 +32,17 @@ export class LoginPage implements OnInit {
     }).then((overlay) => {
       this.loading = overlay;
       this.loading.present();
+      this.loginService.login(f.value.login, f.value.password);
+    }).finally(() =>{
+      setTimeout(() =>{
+      this.loading.dismiss();
+      }, 1000)
     })
 
     setTimeout(() =>{
-      this.loginService.login(f.value.login, f.value.password);
-      this.loading.dismiss();
-    }, 4000)
+      // this.loginService.login(f.value.login, f.value.password);
+      // this.loading.dismiss();
+    }, 0)
 
     // this.router.navigateByUrl('/tabs/wallet', { skipLocationChange: true }).then(() => {
     //   this.router.navigate(['/tabs/wallet']);
