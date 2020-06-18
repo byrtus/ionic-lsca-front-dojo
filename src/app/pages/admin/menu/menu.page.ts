@@ -12,7 +12,7 @@ export class MenuPage implements OnInit {
   pages = [
     {
       title: 'Statistics',
-      url: '/menu/stats',
+      url: '/menu/statsA',
       icon: 'stats-chart'
     },
     {

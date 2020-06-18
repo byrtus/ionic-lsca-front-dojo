@@ -9,7 +9,7 @@ const routes: Routes = [
     component: MenuPage,
     children: [
       {
-        path: 'stats',
+        path: 'statsA',
         loadChildren: () => import('../stat/stat.module').then(m => m.StatPageModule)
       },
       {
@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: () => import('../view/view.module').then(m => m.ViewPageModule)
       },
       {
-        path: 'account',
+        path: 'accountA',
         loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
       },
       {

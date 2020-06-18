@@ -23,7 +23,5 @@ export class AccountPage implements OnInit {
             this.user = response;
             this.userDetails = response['userSpecifics'];
         });
-
     }
-
 }

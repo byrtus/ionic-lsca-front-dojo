@@ -20,12 +20,13 @@
           </ion-item>
         </ion-menu-toggle>
 
+      </ion-list>
         <ion-list>
           <ion-list-header>
             Account
           </ion-list-header>
-          <ion-item [routerLink]="'/menu/account'" routerDirection="root"
-                    [class.active-item]="selectedPatch.startsWith('/menu/account')">
+          <ion-item [routerLink]="'/menu/accountA'" routerDirection="root"
+                    [class.active-item]="selectedPatch.startsWith('/menu/accountA')">
             <ion-icon slot="start" [name]="'person-circle-outline'"></ion-icon>
             <ion-label>
               Edit Account
@@ -36,7 +37,6 @@
             Logout
           </ion-item>
         </ion-list>
-      </ion-list>
     </ion-content>
   </ion-menu>
 

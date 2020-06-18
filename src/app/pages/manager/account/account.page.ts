@@ -11,6 +11,7 @@ export class AccountPage implements OnInit {
 
   user:any = [];
   userDetails = [];
+  companyDetails = [];
 
   constructor(public loginService: LoginService,
               public userService: UserService
@@ -22,6 +23,7 @@ export class AccountPage implements OnInit {
     this.loginService.getUserById(this.loginService.userId).subscribe(response => {
       this.user = response;
       this.userDetails = response['userSpecifics'];
+      this.companyDetails = response['userSpecifics']['company'];
     });
 
   }
