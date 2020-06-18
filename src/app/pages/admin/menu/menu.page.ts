@@ -22,7 +22,7 @@ export class MenuPage implements OnInit {
     },
     {
       title: 'Administration',
-      url: '/menu/administration',
+      url: '/menu/administrate',
       icon: 'construct'
     }
   ]
