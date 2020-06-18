@@ -13,12 +13,12 @@ export class MenuPage implements OnInit {
         {
             title: 'Statistics',
             url: '/menu/stat',
-            icon: 'qr-code'
+            icon: 'stats-chart'
         },
         {
             title: 'Stamp Card',
             url: '/menu/stamp-card',
-            icon: 'qr-code'
+            icon: 'albums'
         },
         {
             title: 'QR Code',

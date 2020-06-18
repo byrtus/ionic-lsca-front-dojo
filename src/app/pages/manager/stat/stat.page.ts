@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../../../providers/login.service";
 
 @Component({
   selector: 'app-stat',
@@ -6,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stat.page.scss'],
 })
 export class StatPage implements OnInit {
+  private userId: string;
 
-  constructor() { }
+  constructor(
+      private loginService: LoginService,
+  ) { }
 
+  ionViewDidEnter() {
+    this.userId = this.loginService.userId;
+  }
+  
   ngOnInit() {
   }
 

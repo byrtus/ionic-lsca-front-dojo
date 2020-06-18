@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {NavigationStart, Router, RouterEvent} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {filter, map, tap} from "rxjs/operators";
 import {ToastController} from "@ionic/angular";
+import {UserService} from "./user.service";
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class LoginService {
 
     private _userId: any;
     private authenticationState$ = new BehaviorSubject(this.isTokenValid());
+    private userType: any
 
     constructor(private http: HttpClient,
                 private router: Router,
@@ -36,13 +38,12 @@ export class LoginService {
     }
 
     login(username: string, password: string): any {
-        //jak coś może być trzeba obciąć "Bearer "??????
         this.postLogin(username, password)
             .subscribe(async response => {
-                console.log('test');
                 localStorage.setItem("Token", response.body['Authorization']);
                 this._userId = response.body['UserId'];
                 this.authenticationState$.next(this.isTokenValid());
+
                 const toast = await this.toastCtrl.create({
                     position: 'top',
                     duration: 3000,
@@ -50,21 +51,62 @@ export class LoginService {
                     message: 'Welcome ' + username
                 });
                 await toast.present();
-                this.router.navigateByUrl('/menu/wallet');
+
+                this.checkUserType(this._userId);
             },async error => {
                 const toast = await this.toastCtrl.create({
                     duration: 3000,
                     header: 'Login Fail.',
                     message: 'Bad login or password.'
-                });
+                })
                 await toast.present();
             });
     }
 
-    logout(){
+    private checkUserType(userId: String) {
+
+           this.getUserById(userId).toPromise().then(data =>{
+                this.userType = (data['roles'].toString())
+
+            }).finally(() =>{this.redirectUserType()})
+
+    }
+
+    redirectUserType(){
+        console.log("this is USER TYPE --> " + this.userType)
+        if(this.userType == 'USER'){
+            console.log('Customer Page')
+            this.router.navigateByUrl('/menu/wallet');
+        }else if (this.userType == 'MANAGER'){
+            console.log('Manager Page')
+            this.router.navigateByUrl('/menu/stat');
+        }else if (this.userType == 'ADMIN'){
+            console.log('Admin Page')
+            this.router.navigateByUrl('/menu/stat');
+        }else{
+
+        }
+    }
+
+    getUserById(userId)  {
+
+        const header ={ headers: new HttpHeaders()
+                .set('Authorization',  `${this.getToken()}`)}
+        return this.http.get(`${environment.apiUrl}/api/users/${userId}`, header)
+
+    }
+
+
+    async logout() {
         localStorage.clear();
         this.authenticationState$.next(false);
         this.router.navigateByUrl('/login');
+        const toast = await this.toastCtrl.create({
+            position: "top",
+            duration: 2000,
+            message: 'You have Successful Logout',
+        });
+        await toast.present();
     }
 
      getIsAuthenticated(): Observable<boolean> {
