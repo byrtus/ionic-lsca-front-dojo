@@ -16,7 +16,7 @@ export class MenuPage implements OnInit {
       icon: 'wallet'
     },
     {
-      title: 'Promotions',
+      title: 'Recent',
       url: '/menu/promo',
       icon: 'pricetags'
     },

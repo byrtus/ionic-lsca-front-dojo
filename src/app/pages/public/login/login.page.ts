@@ -40,10 +40,10 @@ export class LoginPage implements OnInit {
       }, 1000)
     })
 
-    setTimeout(() =>{
+    // setTimeout(() =>{
       // this.loginService.login(f.value.login, f.value.password);
       // this.loading.dismiss();
-    }, 0)
+    // }, 0)
 
     // this.router.navigateByUrl('/tabs/wallet', { skipLocationChange: true }).then(() => {
     //   this.router.navigate(['/tabs/wallet']);

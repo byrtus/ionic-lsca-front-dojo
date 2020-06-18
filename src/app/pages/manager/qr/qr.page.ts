@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Config, IonList} from "@ionic/angular";
+import {BarcodeScanner} from '@ionic-native/barcode-scanner/ngx';
+import {Base64ToGallery, Base64ToGalleryOptions} from '@ionic-native/base64-to-gallery/ngx';
+import {ToastController} from '@ionic/angular';
+import {AndroidPermissions} from '@ionic-native/android-permissions';
+import {LoginService} from "../../../providers/login.service";
 
 @Component({
   selector: 'app-qr',
@@ -7,9 +13,89 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrPage implements OnInit {
 
-  constructor() { }
+  @ViewChild('userQRCode', { static: true }) userQRCode: IonList;
+
+  qrData: string;
+  ios: boolean;
+  segment = 'scanQR';
+  groups: any = [];
+  scannedCode = null;
+  elementType: 'url' | 'canvas' | 'img' = 'canvas';
+  hasWriteAccess = false;
+
+  constructor(
+      private barcodeScanner: BarcodeScanner,
+      private base64ToGallery: Base64ToGallery,
+      private toastCtrl: ToastController,
+      public config: Config,
+      private loginService: LoginService
+  ) { }
+
+  ionViewDidEnter(){
+    this.qrData = 'companyID: ' + this.loginService.userId;
+  }
 
   ngOnInit() {
+    // this.qrData = this.qrData + this.loginService.userId;
+    this.ios = this.config.get('mode') === 'ios';
+    this.checkPermissions();
+  }
+
+
+  scanCode() {
+    this.barcodeScanner.scan().then(
+        barcodeData => {
+          this.scannedCode = barcodeData.text;
+        }
+    );
+  }
+
+  checkPermissions() {
+    const permissions = AndroidPermissions;
+    permissions
+        .checkPermission(permissions
+            .PERMISSION.WRITE_EXTERNAL_STORAGE)
+        .then((result) => {
+          console.log('Has permission?', result.hasPermission);
+          this.hasWriteAccess = result.hasPermission;
+        }, (err) => {
+          permissions
+              .requestPermission(permissions
+                  .PERMISSION.WRITE_EXTERNAL_STORAGE);
+        });
+    if (!this.hasWriteAccess) {
+      permissions
+          .requestPermissions([permissions
+              .PERMISSION.WRITE_EXTERNAL_STORAGE]);
+    }
+
+    return permissions;
+  }
+
+  downloadQR() {
+    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+    const imageData = canvas.toDataURL('image/jpeg').toString();
+    console.log('data: ', imageData);
+
+    const data = imageData.split(',')[1];
+
+    if (!this.hasWriteAccess) {
+      this.checkPermissions();
+    }
+    const options: Base64ToGalleryOptions = {
+      prefix: '_img',
+      mediaScanner: true
+    };
+    this.base64ToGallery
+        .base64ToGallery(data, options).then(async res => {
+          const toast = await this.toastCtrl.create({
+
+            duration: 3000,
+            header: 'QR Code saved in your Photo library'
+          });
+          toast.present();
+        }, err => console.log('err: ', err)
+    );
   }
 
 }

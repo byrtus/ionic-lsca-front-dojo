@@ -41,10 +41,6 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('./pages/manager/menu/menu.module').then(m => m.MenuPageModule)
   },
-  {
-    path: 'stat',
-    loadChildren: () => import('./pages/manager/stat/stat.module').then(m => m.StatPageModule)
-  },
     // Wild Card Protection
 
   {

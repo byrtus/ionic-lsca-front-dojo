@@ -11,8 +11,19 @@ export class MenuPage implements OnInit {
 
     pages = [
         {
-            title: 'Stats',
+            title: 'Statistics',
             url: '/menu/stat',
+            icon: 'qr-code'
+        },
+        {
+            title: 'Stamp Card',
+            url: '/menu/stamp-card',
+            icon: 'qr-code'
+        },
+        {
+            title: 'QR Code',
+            url: '/menu/Qr',
+            icon: 'qr-code'
         }
     ]
 
