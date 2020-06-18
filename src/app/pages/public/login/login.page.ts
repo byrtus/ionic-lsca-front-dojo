@@ -23,6 +23,24 @@ export class LoginPage implements OnInit {
     // this.loginService.logout();
   }
 
+  // To Delete in feature
+  temporaryLogin(login:any, password:any){
+    console.log("login: "+ login + " | password: "+password);
+
+    this.loadingCtrl.create({
+      message: 'Authentication...',
+      spinner: "bubbles"
+    }).then((overlay) => {
+      this.loading = overlay;
+      this.loading.present();
+      this.loginService.login(login, password);
+    }).finally(() =>{
+      setTimeout(() =>{
+        this.loading.dismiss();
+      }, 1000)
+    })
+  }
+
 
   onSubmit(f: NgForm) {
     console.log(f.value);
@@ -40,13 +58,5 @@ export class LoginPage implements OnInit {
       }, 1000)
     })
 
-    // setTimeout(() =>{
-      // this.loginService.login(f.value.login, f.value.password);
-      // this.loading.dismiss();
-    // }, 0)
-
-    // this.router.navigateByUrl('/tabs/wallet', { skipLocationChange: true }).then(() => {
-    //   this.router.navigate(['/tabs/wallet']);
-    // });
   }
 }

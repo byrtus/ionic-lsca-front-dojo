@@ -82,7 +82,7 @@ export class LoginService {
             this.router.navigateByUrl('/menu/stat');
         }else if (this.userType == 'ADMIN'){
             console.log('Admin Page')
-            this.router.navigateByUrl('/menu/stat');
+            this.router.navigateByUrl('/menu/stats');
         }else{
 
         }

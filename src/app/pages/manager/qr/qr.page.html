@@ -1,15 +1,24 @@
 <ion-header>
+
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
     <ion-title>QR Code</ion-title>
   </ion-toolbar>
+
   <ion-toolbar *ngIf="!ios">
     <ion-segment [(ngModel)]="segment">
+
       <ion-segment-button value="scanQR">
         Scan QR Code
       </ion-segment-button>
+
       <ion-segment-button value="myQR">
-        Company Transaction QR
+        Transaction QR
       </ion-segment-button>
+
     </ion-segment>
   </ion-toolbar>
 </ion-header>

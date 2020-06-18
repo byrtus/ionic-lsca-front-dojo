@@ -41,12 +41,32 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('./pages/manager/menu/menu.module').then(m => m.MenuPageModule)
   },
-    // Wild Card Protection
+
+    // ADMIN COMPONENTS
+
+  {
+    path: 'stat',
+    loadChildren: () => import('./pages/admin/stat/stat.module').then( m => m.StatPageModule)
+  },
+  {
+    path: 'menu',
+    loadChildren: () => import('./pages/admin/menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'administrate',
+    loadChildren: () => import('./pages/admin/administrate/administrate.module').then( m => m.AdministratePageModule)
+  },
+
+  // Wild Card Protection
 
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'view',
+    loadChildren: () => import('./pages/admin/view/view.module').then( m => m.ViewPageModule)
   },
 
 ];
