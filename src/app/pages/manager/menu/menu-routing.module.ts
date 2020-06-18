@@ -21,6 +21,18 @@ const routes: Routes = [
         path: 'Qr',
         loadChildren: () => import('../qr/qr.module').then(m => m.QrPageModule)
       },
+      {
+        path: 'Qr',
+        loadChildren: () => import('../qr/qr.module').then(m => m.QrPageModule)
+      },{
+        path: 'account',
+        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/menu/stat',
+        pathMatch: 'full'
+      }
     ]
   }
 ];

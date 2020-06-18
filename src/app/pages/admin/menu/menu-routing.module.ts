@@ -20,6 +20,15 @@ const routes: Routes = [
         path: 'view',
         loadChildren: () => import('../view/view.module').then(m => m.ViewPageModule)
       },
+      {
+        path: 'account',
+        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/menu/stats',
+        pathMatch: 'full'
+      }
     ]
   }
 ];

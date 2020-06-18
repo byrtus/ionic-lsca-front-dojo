@@ -1,9 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>account</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Admin Account</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div padding>
 
+    <ion-card>
+
+      <ion-item>
+        <ion-text>User Name : </ion-text>
+        <ion-input name="userName" type="text" placeholder=" Enter New Login Name" ngModel ='{{user.username}}'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-text>New Password : </ion-text>
+        <ion-input name="password" type="password" placeholder=" Enter New Password" ngModel required></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-text>First Name : </ion-text>
+        <ion-input name="firstName" type="text" placeholder=" Enter New First Name" ngModel ='{{userDetails.firstName}}'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-text>Last Name : </ion-text>
+        <ion-input name="lastName" type="text" placeholder=" Enter New Last Name" ngModel ='{{userDetails.lastName}}'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-text>E-Mail : </ion-text>
+        <ion-input name="email" type="email" placeholder=" Enter new E-Mail" ngModel ='{{userDetails.email}}'></ion-input>
+      </ion-item>
+
+
+    </ion-card>
+
+    <div padding>
+      <ion-button size="large" type="submit" expand="block">Save</ion-button>
+    </div>
+
+
+  </div>
 </ion-content>
