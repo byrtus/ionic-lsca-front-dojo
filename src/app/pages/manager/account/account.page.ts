@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../../providers/login.service";
 import {UserService} from "../../../providers/user.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-account',
@@ -12,6 +13,7 @@ export class AccountPage implements OnInit {
   user:any = [];
   userDetails = [];
   companyDetails = [];
+  pass: any;
 
   constructor(public loginService: LoginService,
               public userService: UserService
@@ -20,12 +22,16 @@ export class AccountPage implements OnInit {
   ngOnInit() {}
 
   ionViewDidEnter() {
+    this.pass = this.loginService.pass;
     this.loginService.getUserById(this.loginService.userId).subscribe(response => {
       this.user = response;
       this.userDetails = response['userSpecifics'];
       this.companyDetails = response['userSpecifics']['company'];
     });
-
   }
 
+  userRegister(userForm: NgForm) {
+    // this.registerService.customerRegister(userForm.value.userName, userForm.value.password, userForm.value.firstName, userForm.value.lastName, userForm.value.email);
+    console.log(userForm.value);
+  }
 }

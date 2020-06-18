@@ -10,6 +10,7 @@
 <ion-content>
   <div padding>
 
+    <form #userForm="ngForm" (ngSubmit)="userRegister(userForm)">
       <ion-card>
 
         <ion-item>
@@ -19,7 +20,7 @@
 
         <ion-item>
           <ion-text>New Password : </ion-text>
-          <ion-input name="password" type="password" placeholder=" Enter New Password" ngModel required></ion-input>
+          <ion-input name="password" type="password" placeholder=" Enter New Password" ngModel ='{{pass}}'></ion-input>
         </ion-item>
 
 
@@ -45,6 +46,7 @@
         <ion-button size="large" type="submit" expand="block">Save</ion-button>
       </div>
 
+    </form>
 
   </div>
 </ion-content>

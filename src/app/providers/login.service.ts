@@ -16,7 +16,12 @@ export class LoginService {
 
     private _userId: any;
     private authenticationState$ = new BehaviorSubject(this.isTokenValid());
-    private userType: any
+    private userType: any;
+    private _pass: any;
+
+    get pass(): any {
+        return this._pass;
+    }
 
     constructor(private http: HttpClient,
                 private router: Router,
@@ -38,6 +43,7 @@ export class LoginService {
     }
 
     login(username: string, password: string): any {
+        this._pass = password;
         this.postLogin(username, password)
             .subscribe(async response => {
                 localStorage.setItem("Token", response.body['Authorization']);
