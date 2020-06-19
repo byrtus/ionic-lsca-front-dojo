@@ -7,7 +7,6 @@ import {UserService} from "../../../providers/user.service";
 import {LoginService} from "../../../providers/login.service";
 
 
-
 @Component({
     selector: 'app-wallet',
     templateUrl: './wallet.page.html',
@@ -22,6 +21,7 @@ export class WalletPage implements OnInit {
     groups: any = [];
     private data: any;
     companies: any[];
+    companies1: any[];
     user: any;
     userId: string;
 
@@ -33,41 +33,31 @@ export class WalletPage implements OnInit {
         private http: HttpClient,
         private loginService: LoginService
     ) {
+        this.getCompanies();
     }
 
-    ionViewDidEnter(){
-        this.userId = this.loginService.userId;
+    ionViewDidEnter() {
+        this.loginService.loginDismiss();
         this.getCompanies();
+        this.userId = this.loginService.userId;
+        this.companies = this.companies1; //must be
         this.getUser();
         this.ios = this.config.get('mode') === 'ios';
     }
 
     ngOnInit() {
-        // this.userId = this.loginService.userId;
-        // this.getCompanies();
-        // this.getUser();
+        this.getCompanies()
+        // this.companies = this.companies1; //must be
         // this.ios = this.config.get('mode') === 'ios';
     }
-
-    // ionViewDidEnter(){
-    //     this.loginService.authenticationState.subscribe(state =>{
-    //         if (state) {
-    //             console.log('login OK')
-    //             this.updateSchedule();
-    //             this.getCompanies();
-    //             this.getUser();
-    //             this.ios = this.config.get('mode') === 'ios';
-    //         } else {
-    //             console.log('login FALSE')
-    //             this.router.navigateByUrl('/login')
-    //         }
-    //     })
-    // }
 
 
     getCompanies() {
         this.companiesService.getCompanies().subscribe(
-            response => this.companies = response
+            response => {
+                this.companies1 = response;
+                this.companies = response;
+            }
         );
     }
 
@@ -76,5 +66,19 @@ export class WalletPage implements OnInit {
         this.userService.getUserById(this.userId).subscribe(
             response => this.user = response
         );
+    }
+
+    getItems(ev: any) {
+        this.companies = this.companies1;
+
+        // set val to the value of the searchbar
+        const val = ev.target.value;
+
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            this.companies = this.companies.filter((item) => {
+                return (item['companyName'].toLowerCase().indexOf(val.toLowerCase()) > -1);
+            })
+        }
     }
 }

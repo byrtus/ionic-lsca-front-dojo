@@ -15,6 +15,7 @@ export class StatPage implements OnInit {
 
   ionViewDidEnter() {
     this.userId = this.loginService.userId;
+    this.loginService.loginDismiss();
   }
   
   ngOnInit() {

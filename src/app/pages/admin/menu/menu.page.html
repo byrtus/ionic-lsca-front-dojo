@@ -25,6 +25,7 @@
           <ion-list-header>
             Account
           </ion-list-header>
+          <ion-menu-toggle contentId="content" auto-hide="false">
           <ion-item [routerLink]="'/menu/accountA'" routerDirection="root"
                     [class.active-item]="selectedPatch.startsWith('/menu/accountA')">
             <ion-icon slot="start" [name]="'person-circle-outline'"></ion-icon>
@@ -36,6 +37,7 @@
             <ion-icon name="log-out" slot="start"></ion-icon>
             Logout
           </ion-item>
+          </ion-menu-toggle>
         </ion-list>
     </ion-content>
   </ion-menu>

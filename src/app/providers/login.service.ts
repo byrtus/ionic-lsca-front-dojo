@@ -5,9 +5,9 @@ import {NavigationStart, Router, RouterEvent} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {filter, map, tap} from "rxjs/operators";
-import {ToastController} from "@ionic/angular";
-import {UserService} from "./user.service";
+import {LoadingController, ToastController} from "@ionic/angular";
 
+// import { timeout } from 'rxjs/operators/timeout';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +18,7 @@ export class LoginService {
     private authenticationState$ = new BehaviorSubject(this.isTokenValid());
     private userType: any;
     private _pass: any;
+    private loading;
 
     get pass(): any {
         return this._pass;
@@ -25,6 +26,7 @@ export class LoginService {
 
     constructor(private http: HttpClient,
                 private router: Router,
+                private loadingCtrl: LoadingController,
                 private toastCtrl: ToastController,
                 public jwtHelper: JwtHelperService) {
         router.events
@@ -39,65 +41,85 @@ export class LoginService {
     }
 
     postLogin(username: string, password: string): Observable<any> {
-        return this.http.post<any>(`${environment.apiUrl}/login`, {username: username, password: password}, {observe: "response"})
+        return this.http.post<any>(`${environment.apiUrl}/login`, {
+            username: username,
+            password: password
+        }, {observe: "response"})
     }
 
     login(username: string, password: string): any {
         this._pass = password;
-        this.postLogin(username, password)
-            .subscribe(async response => {
-                localStorage.setItem("Token", response.body['Authorization']);
-                this._userId = response.body['UserId'];
-                this.authenticationState$.next(this.isTokenValid());
+        this.loadingCtrl.create({
+            message: 'Authentication...',
+            spinner: "bubbles"
+        }).then((overlay) => {
+            this.loading = overlay;
+            this.loading.present();
+            this.postLogin(username, password)
+                .subscribe(async response => {
+                    localStorage.setItem("Token", response.body['Authorization']);
+                    this._userId = response.body['UserId'];
+                    this.authenticationState$.next(this.isTokenValid());
 
-                const toast = await this.toastCtrl.create({
-                    position: 'top',
-                    duration: 3000,
-                    header: 'Login Successful',
-                    message: 'Welcome ' + username
+                    const toast = await this.toastCtrl.create({
+                        position: 'top',
+                        duration: 3000,
+                        header: 'Login Successful',
+                        message: 'Welcome ' + username
+                    });
+                    await toast.present();
+
+                    this.checkUserType(this._userId);
+                }, async error => {
+                    this.loginDismiss();
+                    const toast = await this.toastCtrl.create({
+                        duration: 3000,
+                        header: 'Login Fail.',
+                        message: 'Bad login or password.'
+                    })
+                    await toast.present();
                 });
-                await toast.present();
+        });
 
-                this.checkUserType(this._userId);
-            },async error => {
-                const toast = await this.toastCtrl.create({
-                    duration: 3000,
-                    header: 'Login Fail.',
-                    message: 'Bad login or password.'
-                })
-                await toast.present();
-            });
+    }
+
+    loginDismiss(){
+        this.loading.dismiss();
     }
 
     private checkUserType(userId: String) {
 
-           this.getUserById(userId).toPromise().then(data =>{
-                this.userType = (data['roles'].toString())
+        this.getUserById(userId).toPromise().then(data => {
+            this.userType = (data['roles'].toString())
 
-            }).finally(() =>{this.redirectUserType()})
+        }).finally(() => {
+            this.redirectUserType()
+        })
 
     }
 
-    redirectUserType(){
+    redirectUserType() {
         console.log("this is USER TYPE --> " + this.userType)
-        if(this.userType == 'USER'){
+        if (this.userType == 'USER') {
             console.log('Customer Page')
             this.router.navigateByUrl('/menu/wallet');
-        }else if (this.userType == 'MANAGER'){
+        } else if (this.userType == 'MANAGER') {
             console.log('Manager Page')
             this.router.navigateByUrl('/menu/stat');
-        }else if (this.userType == 'ADMIN'){
+        } else if (this.userType == 'ADMIN') {
             console.log('Admin Page')
             this.router.navigateByUrl('/menu/statsA');
-        }else{
+        } else {
 
         }
     }
 
-    getUserById(userId)  {
+    getUserById(userId) {
 
-        const header ={ headers: new HttpHeaders()
-                .set('Authorization',  `${this.getToken()}`)}
+        const header = {
+            headers: new HttpHeaders()
+                .set('Authorization', `${this.getToken()}`)
+        }
         return this.http.get(`${environment.apiUrl}/api/users/${userId}`, header)
 
     }
@@ -115,9 +137,9 @@ export class LoginService {
         await toast.present();
     }
 
-     getIsAuthenticated(): Observable<boolean> {
+    getIsAuthenticated(): Observable<boolean> {
         return this.authenticationState$.asObservable();
-     }
+    }
 
     private isTokenValid(): boolean {
         return !this.jwtHelper.isTokenExpired(localStorage.getItem('Token'));

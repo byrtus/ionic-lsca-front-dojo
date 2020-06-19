@@ -12,11 +12,11 @@ export class LoginPage implements OnInit {
 
   login: string = '';
   password: string = '';
-  private loading;
+  // private loading;
 
   constructor(
       private loginService: LoginService,
-      private loadingCtrl : LoadingController
+      // private loadingCtrl : LoadingController
   ) {  }
 
   ngOnInit() {
@@ -27,36 +27,36 @@ export class LoginPage implements OnInit {
   temporaryLogin(login:any, password:any){
     console.log("login: "+ login + " | password: "+password);
 
-    this.loadingCtrl.create({
-      message: 'Authentication...',
-      spinner: "bubbles"
-    }).then((overlay) => {
-      this.loading = overlay;
-      this.loading.present();
+    // this.loadingCtrl.create({
+    //   message: 'Authentication...',
+    //   spinner: "bubbles"
+    // }).then((overlay) => {
+    //   this.loading = overlay;
+    //   this.loading.present();
       this.loginService.login(login, password);
-    }).finally(() =>{
-      setTimeout(() =>{
-        this.loading.dismiss();
-      }, 1000)
-    })
+    // }).finally(() =>{
+    //   setTimeout(() =>{
+    //     this.loading.dismiss();
+    //   }, 1000)
+    // })
   }
 
 
   onSubmit(f: NgForm) {
     console.log(f.value);
 
-    this.loadingCtrl.create({
-      message: 'Authentication...',
-      spinner: "bubbles"
-    }).then((overlay) => {
-      this.loading = overlay;
-      this.loading.present();
+    // this.loadingCtrl.create({
+    //   message: 'Authentication...',
+    //   spinner: "bubbles"
+    // }).then((overlay) => {
+    //   this.loading = overlay;
+    //   this.loading.present();
       this.loginService.login(f.value.login, f.value.password);
-    }).finally(() =>{
-      setTimeout(() =>{
-      this.loading.dismiss();
-      }, 1000)
-    })
+    // }).finally(() =>{
+    //   setTimeout(() =>{
+    //   this.loading.dismiss();
+    //   }, 5000)
+    // })
 
   }
 }

@@ -39,6 +39,7 @@
 
         <ion-list [ngSwitch]="segment">
             <ion-item-group *ngSwitchCase="'allCards'">
+                <ion-searchbar placeholder="Filter Companies" showCancelButton="focus" (ionInput)="getItems($event)"></ion-searchbar>
                 <ion-card *ngFor="let company of companies">
 
                     <ion-item detail="false" lines="none" routerLink="/tabs/wallet/card-detail/{{company.id}}">

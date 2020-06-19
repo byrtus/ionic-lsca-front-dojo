@@ -1,12 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>All View</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>All View</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+    <!-- Searchbar with cancel button shown on focus -->
+    <ion-searchbar placeholder="Filter Companies" showCancelButton="focus">
+<!--                   [(ngModel)]="myInput"-->
+<!--                   [showCancelButton]="shouldShowCancel"-->
+<!--                   (ionInput)="onInput($event)"-->
+<!--                   (ionCancel)="onCancel($event)"-->
+
+
+    </ion-searchbar>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let item of items">
+            {{ item }}
+        </ion-item>
+    </ion-list>
+
 
 </ion-content>
