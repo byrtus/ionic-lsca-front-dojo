@@ -18,4 +18,10 @@ export class UserService {
           .set('Authorization',  `${this.loginService.getToken()}`)}
     return this.http.get<any>(`${environment.apiUrl}/api/users/${userId}`, header)
   }
+
+  getAllUsers(): Observable<any> {
+    const header ={ headers: new HttpHeaders()
+          .set('Authorization',  `${this.loginService.getToken()}`)}
+    return this.http.get<any>(`${environment.apiUrl}/api/users`, header)
+  }
 }

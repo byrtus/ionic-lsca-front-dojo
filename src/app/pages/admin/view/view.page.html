@@ -5,25 +5,63 @@
         </ion-buttons>
         <ion-title>All View</ion-title>
     </ion-toolbar>
+    <ion-toolbar *ngIf="!ios">
+        <ion-segment [(ngModel)]="segment">
+            <ion-segment-button value="allUsers">
+                View All Users
+            </ion-segment-button>
+            <ion-segment-button value="allCompanies">
+                View All Companies
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <!-- Searchbar with cancel button shown on focus -->
-    <ion-searchbar placeholder="Filter Companies" showCancelButton="focus">
-<!--                   [(ngModel)]="myInput"-->
-<!--                   [showCancelButton]="shouldShowCancel"-->
-<!--                   (ionInput)="onInput($event)"-->
-<!--                   (ionCancel)="onCancel($event)"-->
+    <ion-content>
+
+        <ion-list [ngSwitch]="segment">
+            <ion-item-group *ngSwitchCase="'allUsers'">
+
+                <ion-searchbar placeholder="Filter Users Login" showCancelButton="focus" (ionInput)="getUserItems($event)"></ion-searchbar>
+
+                <ion-card *ngFor="let user of users">
+
+                    <ion-item detail="false" lines="none">
+                        <ion-card-header>
+                            <ion-card-title>Login: {{ user.username }}</ion-card-title>
+                            <ion-card-subtitle>First Name: {{user.userSpecifics.firstName}} | Lats Name: {{ user.userSpecifics.lastName }} </ion-card-subtitle>
+                            <ion-card-subtitle>Email: {{user.userSpecifics.email}} </ion-card-subtitle>
+                            <ion-card-subtitle>User Role: {{user.roles}} </ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-item>
 
 
-    </ion-searchbar>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-list>
-        <ion-item *ngFor="let item of items">
-            {{ item }}
-        </ion-item>
-    </ion-list>
+                </ion-card>
+            </ion-item-group>
+        </ion-list>
+
+        <ion-list [ngSwitch]="segment">
+            <ion-item-group *ngSwitchCase="'allCompanies'">
+
+                <ion-searchbar placeholder="Filter Companies" showCancelButton="focus" (ionInput)="getCompaniesItems($event)"></ion-searchbar>
+
+                <ion-card *ngFor="let company of companies">
+
+                    <ion-item detail="false" lines="none" routerLink="/tabs/wallet/card-detail/{{company.id}}">
+                        <ion-card-header>
+                            <ion-card-title>{{ company.companyName }}</ion-card-title>
+                            <ion-card-subtitle>{{company.zipCode}} {{ company.city }} {{ company.street }} {{company.localNumber}}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-item>
+
+                </ion-card>
+            </ion-item-group>
+        </ion-list>
+
+    </ion-content>
+
 
 
 </ion-content>
