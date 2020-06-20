@@ -23,8 +23,20 @@
 
         <ion-list [ngSwitch]="segment">
             <ion-item-group *ngSwitchCase="'allUsers'">
+                <ion-item>
+                    <ion-label>Filter</ion-label>
+                    <ion-select placeholder="Select One" value="" (ionChange)="setSearchType($event)">
+                        <ion-select-option value="">All Users</ion-select-option>
+                        <ion-select-option value="admin">Admin</ion-select-option>
+                        <ion-select-option value="manager">Company</ion-select-option>
+                        <ion-select-option value="user">Customer</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
 
                 <ion-searchbar placeholder="Filter Users Login" showCancelButton="focus" (ionInput)="getUserItems($event)"></ion-searchbar>
+
+
 
                 <ion-card *ngFor="let user of users">
 

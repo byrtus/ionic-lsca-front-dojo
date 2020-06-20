@@ -19,7 +19,7 @@ export class ViewPage implements OnInit {
     users: any[];
     users1: any[];
     user: any[];
-
+    search: any = 'admin';
 
     constructor(
         public config: Config,
@@ -34,6 +34,7 @@ export class ViewPage implements OnInit {
         this.getUsers();
         this.companies = this.companies1;
         this.users = this.users1;
+
     }
 
     ngOnInit() {
@@ -58,6 +59,7 @@ export class ViewPage implements OnInit {
             }
         );
     }
+
 
     getCompaniesItems(ev: any) {
         this.companies = this.companies1;
@@ -85,6 +87,26 @@ export class ViewPage implements OnInit {
                 return (item['username'].toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
         }
+
+        // if (this.search != 'a') {
+            this.users = this.users.filter((item) => {
+                return (item['roles'].toLowerCase().indexOf(this.search) > -1);
+            });
+        // }
+    }
+
+    setSearchType(ev: any){
+        this.search = ev.target.value;
+
+        this.getUsersFromType();
+    }
+
+    getUsersFromType() {
+        this.users = this.users1;
+
+        this.users = this.users.filter((item) => {
+            return (item['roles'].toLowerCase().indexOf(this.search) > -1);
+        });
     }
 
 }
