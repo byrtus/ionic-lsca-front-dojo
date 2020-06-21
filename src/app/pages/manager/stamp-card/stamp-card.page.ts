@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../../../providers/login.service";
+import {UserService} from "../../../providers/user.service";
 
 @Component({
   selector: 'app-stamp-card',
@@ -7,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StampCardPage implements OnInit {
 
-  constructor() { }
+  user: any[];
+  userId: string;
+
+  constructor(
+      private loginService: LoginService,
+      public userService: UserService,
+  ) { }
+
+  ionViewDidEnter() {
+    this.userId = this.loginService.userId;
+    this.getUser();
+  }
+
+  private getUser() {
+    this.userService.getUserById(this.userId).subscribe(
+        response => this.user = response
+    );
+  }
 
   ngOnInit() {
   }
