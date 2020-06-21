@@ -33,6 +33,7 @@ export class StatPage implements OnInit {
     setTimeout(() =>{
     this.getCustomersCount()
     }, 1000)
+    //TODO
   }
 
   getUsersCount(): any{

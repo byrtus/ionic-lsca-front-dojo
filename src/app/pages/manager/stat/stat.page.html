@@ -8,5 +8,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Count Of Users using your StampCard</ion-label>
+    <ion-badge color="warning" slot="end">{{stampCardCount}}</ion-badge>
+  </ion-item>
 
+  <ion-button (click)="getCountOfUseCompanyStampCard()">Refresh</ion-button>
 </ion-content>
