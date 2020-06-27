@@ -4,7 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {LoginService} from "./providers/login.service";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
+import { timer } from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -12,31 +13,9 @@ import {Observable} from "rxjs";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit{
-  // appPages = [
-  //   {
-  //     title: 'Wallet',
-  //     url: '/tabs/wallet',
-  //     icon: 'wallet'
-  //   },
-  //   {
-  //     title: 'Promotions',
-  //     url: '/tabs/promo',
-  //     icon: 'pricetags'
-  //   },
-  //   {
-  //     title: 'Map',
-  //     url: '/tabs/map',
-  //     icon: 'map'
-  //   },
-  //   {
-  //     title: 'QR Code',
-  //     url: '/tabs/qr',
-  //     icon: 'qr-code'
-  //   }
-  // ];
-
 
   isLogged$: Observable<boolean>;
+  showSplash = true;
 
   constructor(
     private platform: Platform,
@@ -51,6 +30,10 @@ export class AppComponent implements OnInit{
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(3000).subscribe(() =>{
+        // this.splashScreen.hide();
+        this.showSplash = false;
+      })
     });
   }
 
