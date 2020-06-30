@@ -26,7 +26,6 @@ import {HttpClientModule} from "@angular/common/http";
         Base64ToGallery,
         HttpClientModule,
         LoginService,
-
     ],
     bootstrap: [AppComponent]
 })
