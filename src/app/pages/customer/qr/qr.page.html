@@ -18,28 +18,33 @@
 </ion-header>
 
 <ion-content>
-    <ion-list [ngSwitch]="segment" >
+    <ion-list [ngSwitch]="segment">
         <ion-item-group *ngSwitchCase="'myQR'">
             <ion-item>
                 <ion-input type="text" placeholder="My QR code data" [(ngModel)]="qrData">
                 </ion-input>
             </ion-item>
-<div class="qrImage">
-    <ngx-qrcode [value]="qrData" [elementType]="elementType" qrl-class="my-code" class="qrImage" >
-    </ngx-qrcode>
-</div>
+            <div class="qrImage">
+                <ngx-qrcode [value]="qrData" [elementType]="elementType" qrl-class="my-code" height="300" width="300" class="qrImage">
+                </ngx-qrcode>
+            </div>
 
 
-            <ion-card-content>
-                <ion-button expand="full" color="tertiary" (click)="downloadQR()" *ngIf="elementType === 'canvas'">
-                    <ion-icon name="download" slot="start"></ion-icon>
-                    Download Your QR Code
-                </ion-button>
-            </ion-card-content>
+<!--            <ion-card-content>-->
+<!--                <ion-button expand="full" color="tertiary" (click)="downloadQR()" *ngIf="elementType === 'canvas'">-->
+<!--                    <ion-icon name="download" slot="start"></ion-icon>-->
+<!--                    Download Your QR Code-->
+<!--                </ion-button>-->
+<!--            </ion-card-content>-->
 
         </ion-item-group>
 
         <ion-item-group *ngSwitchCase="'scanQR'">
+            <ion-item>
+                <ion-text>
+                    If You want check a Loyalty Stamp Card You can always Scan it to see how it look like.
+                </ion-text>
+            </ion-item>
             <ion-button expand="full" (click)="scanCode()" color="secondary">
                 <ion-icon name="qr-scanner"></ion-icon>
                 Scan Code
