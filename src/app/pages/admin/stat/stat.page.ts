@@ -12,6 +12,7 @@ export class StatPage implements OnInit {
   usersCount: any;
   companiesCount: any;
   customersCount: any;
+  adminCount: any;
   stampCardsCount: any;
 
   constructor(private loginService: LoginService,
@@ -19,7 +20,6 @@ export class StatPage implements OnInit {
 
   ngOnInit() {
     this.getAllStatistic();
-    // this.getALL().finally(() => this.getCustomersCount())
   }
 
   ionViewDidEnter() {
@@ -30,10 +30,8 @@ export class StatPage implements OnInit {
     this.getUsersCount()
     this.getCompaniesCount()
     this.getStampCardCount()
-    setTimeout(() =>{
     this.getCustomersCount()
-    }, 1000)
-    //TODO
+    this.getAdminCount()
   }
 
   getUsersCount(): any{
@@ -43,25 +41,23 @@ export class StatPage implements OnInit {
   }
 
   getCompaniesCount(): any{
-    this.statService.getCompanies().subscribe(data =>{
-      this.companiesCount = data.length;
+    this.statService.getUserByType('manager').subscribe(data =>{
+      this.companiesCount = data.length
     })
   }
 
   getCustomersCount(){
-    this.customersCount = parseInt(this.usersCount) - parseInt(this.companiesCount) - 1;
+    this.statService.getUserByType('user').subscribe(data =>{
+      this.customersCount = data.length
+    })
   }
 
-  async getALL(){
-    await this.statService.getUsers().subscribe(data =>{
-      this.usersCount = data.length;
+  getAdminCount(){
+    this.statService.getUserByType('admin').subscribe(data =>{
+      this.adminCount = data.length
     })
-    await this.statService.getCompanies().subscribe(data =>{
-      this.companiesCount = data.length;
-    })
-    this.getStampCardCount();
-
   }
+
 
   getStampCardCount(){
     this.statService.getStampCards().subscribe(data =>{

@@ -22,13 +22,15 @@ export class StatService {
     return this.http.get<any>(`${environment.apiUrl}/api/users`, header)
   }
 
-  getCompanies(): Observable<any>  {
-    const header = {
-      headers: new HttpHeaders()
-          .set('Authorization', `${this.loginService.getToken()}`)
-    }
-    return this.http.get<any>(`${environment.apiUrl}/api/companies`, header)
+  getUserByType(type: String): Observable<any> {
+      const header = {
+        headers: new HttpHeaders()
+            .set('Authorization', `${this.loginService.getToken()}`)
+      }
+      return this.http.get<any>(`${environment.apiUrl}/api/users/roles/${type}`, header)
+
   }
+
 
   getStampCards(){
     const header = {

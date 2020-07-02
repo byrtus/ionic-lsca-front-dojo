@@ -7,8 +7,6 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {filter, map, tap} from "rxjs/operators";
 import {LoadingController, ToastController} from "@ionic/angular";
 
-// import { timeout } from 'rxjs/operators/timeout';
-
 @Injectable({
     providedIn: 'root'
 })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../../providers/login.service";
 import {UserService} from "../../../providers/user.service";
 import {NgForm} from "@angular/forms";
+import {EditUsersService} from "../../../providers/edit-users.service";
 
 @Component({
   selector: 'app-account',
@@ -16,7 +17,8 @@ export class AccountPage implements OnInit {
   pass: any;
 
   constructor(public loginService: LoginService,
-              public userService: UserService
+              public userService: UserService,
+              public editUsersService: EditUsersService
   ) { }
 
   ngOnInit() {}
@@ -30,8 +32,8 @@ export class AccountPage implements OnInit {
     });
   }
 
-  userRegister(userForm: NgForm) {
-    // this.registerService.customerRegister(userForm.value.userName, userForm.value.password, userForm.value.firstName, userForm.value.lastName, userForm.value.email);
-    console.log(userForm.value);
+  userRegister(companyForm: NgForm) {
+    this.editUsersService.putCompany(companyForm.value.userName, companyForm.value.password, companyForm.value.firstName, companyForm.value.lastName, companyForm.value.email, companyForm.value.companyName, companyForm.value.city, companyForm.value.zipCode, companyForm.value.street, companyForm.value.localNumber, this.loginService.userId)
+    console.log(companyForm.value);
   }
 }

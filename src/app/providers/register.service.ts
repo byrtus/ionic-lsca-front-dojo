@@ -18,7 +18,7 @@ export class RegisterService {
     ) {
     }
 
-    postManager(username: string, password: string, firstName: string, lastName: string, email: String, companyName: string, city: string, zipCode: string, street: string, localNumber: string): Observable<any> {
+    postManager(username: string, password: string, firstName: string, lastName: string, email: string, companyName: string, city: string, zipCode: string, street: string, localNumber: string): Observable<any> {
         return this.http.post<any>(`${environment.apiUrl}/api/register/manager`, {
             username: username,
             password: password,
@@ -33,7 +33,7 @@ export class RegisterService {
         }, {observe: "response"})
     }
 
-    postCustomer(username: string, password: string, firstName: string, lastName: string, email: String): Observable<any> {
+    postCustomer(username: string, password: string, firstName: string, lastName: string, email: string): Observable<any> {
         return this.http.post<any>(`${environment.apiUrl}/api/register/user`, {
             username: username,
             password: password,
