@@ -18,8 +18,8 @@ export class EditUsersService {
   ) {
   }
 
-  putCompany(username: string, password: string, firstName: string, lastName: string, email: String, companyName: string, city: string, zipCode: string, street: string, localNumber: string, userId: string): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/users/edit/manager/${userId}`, {
+  putCompany(username: string, password: string, firstName: string, lastName: string, email: string, companyName: string, city: string, zipCode: string, street: string, localNumber: string, userId: string): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/api/users/edit/manager/${userId}`, {
       username: username,
       password: password,
       firstName: firstName,
@@ -33,7 +33,7 @@ export class EditUsersService {
     }, {observe: "response"})
   }
 
-  putCustomerAndAdmin(username: string, password: string, firstName: string, lastName: string, email: String, userId: string): Observable<any> {
+  putCustomerAndAdmin(username: string, password: string, firstName: string, lastName: string, email: string, userId: string): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/api/users/edit/normal/${userId}`, {
       id: userId,
       username: username,
@@ -57,6 +57,30 @@ export class EditUsersService {
         const toast = await this.toastCtrl.create({
           duration: 3000,
           header: 'User Update: Fail',
+          message: 'Can not Access to server'
+        });
+        await toast.present();
+      });
+    } else {
+      await (await this.toastCtrl.create({
+        message: 'All Data must be fill',
+        duration: 2000
+      })).present();
+    }
+  }
+
+  async companyEdit(username: string, password: string, firstName: string, lastName: string, email: string, companyName: string, city: string, zipCode: string, street: string, localNumber: string, userId: string) {
+    if (this.managerEditVerification(username, password, firstName, lastName, email, companyName, city, zipCode, street, localNumber)){
+      this.putCompany(username, password, firstName, lastName, email, companyName, city, zipCode, street, localNumber , userId).subscribe( async response => {
+        const toast = await this.toastCtrl.create({
+          duration: 3000,
+          header: 'Company Update: Successful',
+        });
+        await toast.present();
+      }, async error => {
+        const toast = await this.toastCtrl.create({
+          duration: 3000,
+          header: 'Company Update: Fail',
           message: 'Can not Access to server'
         });
         await toast.present();

@@ -20,10 +20,10 @@
 <ion-content>
     <ion-list [ngSwitch]="segment">
         <ion-item-group *ngSwitchCase="'myQR'">
-            <ion-item>
-                <ion-input type="text" placeholder="My QR code data" [(ngModel)]="qrData">
-                </ion-input>
-            </ion-item>
+<!--            <ion-item>-->
+<!--                <ion-input type="text" placeholder="My QR code data" [(ngModel)]="qrData">-->
+<!--                </ion-input>-->
+<!--            </ion-item>-->
             <div class="qrImage">
                 <ngx-qrcode [value]="qrData" [elementType]="elementType" qrl-class="my-code" height="300" width="300" class="qrImage">
                 </ngx-qrcode>

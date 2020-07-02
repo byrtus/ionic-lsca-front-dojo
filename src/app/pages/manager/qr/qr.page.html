@@ -26,10 +26,10 @@
 <ion-content>
   <ion-list [ngSwitch]="segment" >
     <ion-item-group *ngSwitchCase="'myQR'">
-      <ion-item>
-        <ion-input type="text" placeholder="My QR code data" [(ngModel)]="qrData">
-        </ion-input>
-      </ion-item>
+<!--      <ion-item>-->
+<!--        <ion-input type="text" placeholder="My QR code data" [(ngModel)]="qrData">-->
+<!--        </ion-input>-->
+<!--      </ion-item>-->
       <div class="qrImage">
         <ngx-qrcode [value]="qrData" [elementType]="elementType" height="300" width="300" qrl-class="my-code" class="qrImage" >
         </ngx-qrcode>
@@ -46,10 +46,16 @@
     </ion-item-group>
 
     <ion-item-group *ngSwitchCase="'scanQR'">
+      <ion-item>
+        <ion-text>
+          To add stamp for customer scan his QR Code
+        </ion-text>
+      </ion-item>
       <ion-button expand="full" (click)="scanCode()" color="secondary">
         <ion-icon name="qr-scanner"></ion-icon>
         Scan Code
       </ion-button>
+<!--      <ion-button (click)="test()">test</ion-button>-->
 
       <ion-card *ngIf="scannedCode">
         <ion-card-content>

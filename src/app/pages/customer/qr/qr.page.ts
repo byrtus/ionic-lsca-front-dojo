@@ -65,7 +65,6 @@ export class QrPage implements OnInit {
             setTimeout(()=>{
                 this.router.navigateByUrl('/tabs/wallet/card-detail/'+ this.companyId)
             },500)
-
         );
     }
 

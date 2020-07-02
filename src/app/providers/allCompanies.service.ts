@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, Subscription} from "rxjs";
 import {environment} from "../../environments/environment";
 import {LoginService} from "./login.service";
+import {ToastController} from "@ionic/angular";
 
 
 @Injectable({
@@ -16,6 +17,7 @@ export class AllCompaniesService {
     private _countStampCardsProgresses: any = ' ';
 
     constructor(private http: HttpClient,
+                private toastCtrl: ToastController,
                 private loginService: LoginService) {
     }
 
@@ -101,6 +103,42 @@ export class AllCompaniesService {
                 .set('Authorization', `${this.loginService.getToken()}`)
         }
         return this.http.get<any>(`${environment.apiUrl}/api/stampcards-progresses`, header)
+    }
+
+    addStampForUser(customerId: string, stampCardId: string, userType: string){
+        if (userType == 'companyID:'){
+            let toast = this.toastCtrl.create({
+                duration: 3000,
+                header: 'You can scan only Customers QR',
+            });
+
+            toast.then((toast) =>
+                toast.present()
+            )
+            // toast.present();
+        }else {
+            this.putStampForUser(customerId,stampCardId).subscribe( async response => {
+                const toast = await this.toastCtrl.create({
+                    duration: 3000,
+                    header: 'Customer Add Stamp: Successful',
+                });
+                await toast.present();
+            }, async error => {
+                const toast = await this.toastCtrl.create({
+                    duration: 3000,
+                    header: 'Customer Add Stamp: Fail',
+                    message: 'Can not Access to server'
+                });
+                await toast.present();
+            });
+        }
+    }
+
+    putStampForUser(customerId: string, stampCardId: string): Observable<any>{
+        return this.http.put<any>(`${environment.apiUrl}/api/stampcards-progresses/${customerId}/${stampCardId}`, {
+            userId: customerId,
+            stampCardId: stampCardId
+        }, {observe: "response"})
     }
 
 }

@@ -33,7 +33,7 @@ export class AccountPage implements OnInit {
   }
 
   userRegister(companyForm: NgForm) {
-    this.editUsersService.putCompany(companyForm.value.userName, companyForm.value.password, companyForm.value.firstName, companyForm.value.lastName, companyForm.value.email, companyForm.value.companyName, companyForm.value.city, companyForm.value.zipCode, companyForm.value.street, companyForm.value.localNumber, this.loginService.userId)
+    this.editUsersService.companyEdit(companyForm.value.userName, companyForm.value.password, companyForm.value.firstName, companyForm.value.lastName, companyForm.value.email, companyForm.value.companyName, companyForm.value.city, companyForm.value.zipCode, companyForm.value.street, companyForm.value.localNumber, this.loginService.userId)
     console.log(companyForm.value);
   }
 }
