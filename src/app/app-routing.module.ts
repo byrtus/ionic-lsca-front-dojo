@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'tabs/wallet/card-detail/:companyId',
+    path: 'card-detail/:companyId',
     loadChildren: () => import('./pages/customer/card-detail/card-detail.module').then(m => m.CardDetailPageModule),
     canActivate: [AuthGuard]
   },
@@ -33,10 +33,6 @@ const routes: Routes = [
 
     // MANAGER COMPONENTS
 
-  {
-    path: 'tabs',
-    loadChildren: () => import('./pages/manager/tabs/tabs.module').then(m => m.TabsPageModule)
-  },
   {
     path: 'menu',
     loadChildren: () => import('./pages/manager/menu/menu.module').then(m => m.MenuPageModule)
